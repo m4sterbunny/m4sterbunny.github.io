@@ -428,6 +428,7 @@ My task was to take a non-spec-compliant API schema (in YAML format) and:
 As is typical with such a project, I was able to identify inconsistencies in logic such as:
 - strings that should be datetime
 - boolean with no type definition to let user know whether to pass 0/1 or True/False
+- allOf that should be anyOf
 
 
 ### Tools Used
@@ -870,4 +871,8 @@ This endpoint retrieves the basic information of all Year Groups. It returns the
 }
 ```
 
+<aside class="notice">
+Unique toFaria's project was particularly challenging due to the access control requirements. Some APIs are going to be available to clients, while others remain private to Faria developers. Faria's CTO wanted a single portal to manage this control pattern.
 
+Also, the API team were not familiar with exposing their API documentation outside of their local teams.
+</aside>
