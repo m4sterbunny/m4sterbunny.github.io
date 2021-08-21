@@ -323,6 +323,29 @@
               </ul>
           </li>
           <li>
+            <a href="#cloud-rf-api-create" class="toc-h1 toc-link" data-title="Create">Create</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-point-to-multipoint-heatmap-parameters" class="toc-h2 toc-link" data-title="Parameters">Parameters</a>
+                  </li>
+                  <li>
+                    <a href="#smtp2go" class="toc-h2 toc-link" data-title="SMTP2GO">SMTP2GO</a>
+                  </li>
+                  <li>
+                    <a href="#smtp2go-public-api" class="toc-h2 toc-link" data-title="SMTP2GO Public API">SMTP2GO Public API</a>
+                  </li>
+                  <li>
+                    <a href="#smtp2go-public-api-v3-0-0-activity" class="toc-h2 toc-link" data-title="Activity">Activity</a>
+                  </li>
+                  <li>
+                    <a href="#postactivitysearch" class="toc-h2 toc-link" data-title="postActivitySearch">postActivitySearch</a>
+                  </li>
+                  <li>
+                    <a href="#api-key-security" class="toc-h2 toc-link" data-title="API key security">API key security</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -338,7 +361,7 @@
 <p>Welcome to my API documentation demo site.</p>
 
 <aside class="notice">
-Some clients have API schemas that will become public, others have gated API documention. Even those that may eventually have their API schema made public, if the full review cycle is not yet complete, they may not want the entire schema in the wild yet. This showcase represents my solution to both challenges.
+Some clients have API schemas that will become public, others have gated API documention. Even clients that intend their API schema to be made public may not want to do so until the full review cycle is complete. This showcase represents my solution to both challenges.
 </aside>
 <h1 id='client'>Client</h1><h2 id='cloud-rf-api'>Cloud RF-API</h2>
 <p><a href="https://docs.cloudrf.com/">Cloud RF</a> provides its customers with a dashboard SaaS and direct access to the API that underpins it. My task was to take a non-spec-compliant API schema (in YAML format) and:</p>
@@ -381,7 +404,937 @@ Cloud RF's api creates electromagnetic and geospacial modelling to assist with p
 <td>For version control via GitHub</td>
 </tr>
 </tbody></table>
-<h4 id='api-schema-extract'>API Schema Extract</h4><h1 id='errors'>Errors</h1>
+<h4 id='api-schema-extract'>API Schema Extract</h4><h5 id='introduction-2'>Introduction</h5>
+<p>The Cloud-RF API enables users to model and test radio propagation for any radio, anywhere. Authenticate by passing your API2.0 key in the request header as <code>key</code>. Set up a <a href="https://cloudrf.com/my-account">CloudRF.com</a> account to generate this key. All data is transferred as JSON. For detailed documentation, visit <a href="https://docs.cloudrf.com">docs.cloudrf.com</a>.</p>
+<h5 id='base-urls'>Base URLs:</h5>
+<ul>
+<li><a href="https://api.cloudrf.com">https://api.cloudrf.com</a></li>
+</ul>
+
+<p><a href="https://cloudrf.com/terms-and-conditions/"></p>
+
+<p>Terms of service</a></p>
+
+<p>Email: <a href="mailto:support@cloudrf.com">Support</a></p>
+<h5 id='authentication'>Authentication</h5>
+<ul>
+<li>API Key (ApiKeyAuth)
+
+<ul>
+<li>Parameter Name: <strong>key</strong>, in: header. An APIKey passed in the request headers.</li>
+</ul></li>
+</ul>
+
+<h1 id="cloud-rf-api-create">Create</h1>
+
+<p>This set of endpoints allows the user to create new links, site heatmaps, routes, and networks.</p>
+<h6 id='create-a-point-to-multipoint-heatmap'>Create a point-to-multipoint heatmap</h6>
+<p><a id="opIdarea"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'API_KEY'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api.cloudrf.com/area'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'key'</span><span class="p">:</span> <span class="s">'API_KEY'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.cloudrf.com/area'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.cloudrf.com/area</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.cloudrf.com</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+
+</code></pre></div>
+<p><code>POST /area</code></p>
+
+<p>This endpoint returns an omni-directional coverage plot (point-to-multipoint) as an image, rendered with a color schema. This function assumes the same receiver height at all locations out to fixed radius (up to a 300 km maximum). Due to its recursive processing, this is the slowest of all the API calls. Speed can be improved significantly by adjusting the resolution &quot;res&quot; parameter upwards so 4 (m) is faster than 2 (m). A standard request requires transmitter, receiver, antenna, and output objects; providing model and environment enhances accuracy.</p>
+
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"site"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Testing"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transmitter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">38.916</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.448</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"alt"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"frq"</span><span class="p">:</span><span class="w"> </span><span class="mi">868</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txw"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bwi"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"alt"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rxg"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rxs"</span><span class="p">:</span><span class="w"> </span><span class="mi">-100</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"antenna"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"txg"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.15</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txl"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ant"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"azi"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tlt"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hbw"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vbw"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"units"</span><span class="p">:</span><span class="w"> </span><span class="s2">"metric"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"col"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RAINBOW.dBm"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"out"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ber"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nf"</span><span class="p">:</span><span class="w"> </span><span class="mi">-100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rad"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="create-a-point-to-multipoint-heatmap-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>false</td>
+<td>The request payload providing the site properties.</td>
+</tr>
+<tr>
+<td>» site</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Site name.</td>
+</tr>
+<tr>
+<td>» network</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Network name/group.</td>
+</tr>
+<tr>
+<td>» transmitter</td>
+<td>body</td>
+<td><a href="#schematransmitter">Transmitter</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» lat</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Latitude of transmitter in decimal degrees.</td>
+</tr>
+<tr>
+<td>»» lon</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Longitude of transmitter in decimal degrees.</td>
+</tr>
+<tr>
+<td>»» alt</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Altitude above ground level in meters OR feet.</td>
+</tr>
+<tr>
+<td>»» frq</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Center frequency in megahertz.</td>
+</tr>
+<tr>
+<td>»» txw</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Transmitter power in watts before the antenna.</td>
+</tr>
+<tr>
+<td>»» bwi</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Bandwidth in MHz. 1MHz has a noise floor of -114dBm; 10MHz = -104dBm; 20MHz = -101dBm.</td>
+</tr>
+<tr>
+<td>» receiver</td>
+<td>body</td>
+<td><a href="#schemareceiver">Receiver</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» lat</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Latitude in decimal degrees.</td>
+</tr>
+<tr>
+<td>»» lon</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Longitude in decimal degrees.</td>
+</tr>
+<tr>
+<td>»» alt</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Altitude above ground level in meters OR feet.</td>
+</tr>
+<tr>
+<td>»» rxg</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Receiver antenna gain in dBi.</td>
+</tr>
+<tr>
+<td>»» rxs</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Receiver sensitivity/threshold in measured units defined by &#39;out&#39; parameter.</td>
+</tr>
+<tr>
+<td>» antenna</td>
+<td>body</td>
+<td><a href="#schemaantenna">Antenna</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» txg</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Transmitter antenna gain in dBi.</td>
+</tr>
+<tr>
+<td>»» txl</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Feeder loss in dB.</td>
+</tr>
+<tr>
+<td>»» ant</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>Antenna pattern code: 0=allows custom options (see: hbw; vbw; fbr) 1=Vertical dipole (omni-directional).</td>
+</tr>
+<tr>
+<td>»» azi</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Antenna azimuth in degrees north.</td>
+</tr>
+<tr>
+<td>»» tlt</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Antenna tilt in degrees below the horizon (inverted).</td>
+</tr>
+<tr>
+<td>»» hbw</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Custom antenna horizontal beamwidth in degrees; for use only with ant=0.</td>
+</tr>
+<tr>
+<td>»» vbw</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Custom antenna vertical beamwidth in degrees; for use only with ant=0.</td>
+</tr>
+<tr>
+<td>»» pol</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Antenna polarization.</td>
+</tr>
+<tr>
+<td>» model</td>
+<td>body</td>
+<td><a href="#schemamodel">Model</a></td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» pm</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>Propagation model: 1=Irregular Terrain Model; 2=Line of Sight (LOS); 3=Hata; 4=ECC33; 5=SUI Microwave; 6=COST231; 7=Free space path loss; 9=Ericsson9999; 10=Plane earth loss; 11=Egli.</td>
+</tr>
+<tr>
+<td>»» pe</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>Propagation model subtype/environment: 1=Conservative/Urban; 2=Average/Suburban; 3=Optimistic/rural.</td>
+</tr>
+<tr>
+<td>»» cli</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>Radio climate for ITM model: (1). 1=Equatorial (Congo); 2=Continental Subtropical (Sudan); 3=Maritime Subtropical (West coast of Africa); 4=Desert (Sahara); 5=Continental Temperate; 6=Maritime Temperate and Over Land (UK and West coasts of US &amp; EU); 7=Maritime Temperate, Over Sea.</td>
+</tr>
+<tr>
+<td>»» ked</td>
+<td>body</td>
+<td>number</td>
+<td>false</td>
+<td>Include knife edge diffraction for enhancing basic empirical models (already in ITM). Switch on/off; 1=INCLUDE, 0=OFF, i.e., if diffraction is OFF (0) then the model applies more conservative &#39;line of sight&#39;.</td>
+</tr>
+<tr>
+<td>»» rel</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>ITM model required reliability as %</td>
+</tr>
+<tr>
+<td>»» ter</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>Terrain code for ITM model (1): 1=Water; 2=Wet ground; 3=Farmland; 4=Forest/Average; 5=Mountain/Sand; 6=City/Poor ground.</td>
+</tr>
+<tr>
+<td>» environment</td>
+<td>body</td>
+<td><a href="#schemaenvironment">Environment</a></td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» clm</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>Clutter mode: 0=None/DSM only; 1=System &amp; custom clutter; 2=Custom clutter only.</td>
+</tr>
+<tr>
+<td>»» cll</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>Clutter loss: 0=None/DSM only; 1=Hard/LOS mode; 2=Soft/NLOS mode.</td>
+</tr>
+<tr>
+<td>»» mat</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Clutter attenuation override in dB/m based on a tree block OR hollow building; light foliage=0.1dB/m; brick=1.0dB/m; concrete=5dB/m.</td>
+</tr>
+<tr>
+<td>» output</td>
+<td>body</td>
+<td><a href="#schemaoutput">Output</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» units</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Define distance units applied; either meters/kilometers (metric) or feet/miles (imperial).</td>
+</tr>
+<tr>
+<td>»» col</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Color schema code OR filename string. Codes: 1=Cellular (5); 2=Red; 3=Green; 4=Blue; 5=Microwave(7); 7=Custom RGB; 8=Automatic by frequency; 9=Greyscale/GIS; 10=Rainbow(24); 11=Green/Blue/Red; 13=Sub noise floor (10); 14=TV broadcasting (4); 15=Red threshold; 16=Green threshold; 17=Blue threshold. Filename examples: RAINBOW.dBm; CUSTOMSCHEMA.dBm.</td>
+</tr>
+<tr>
+<td>»» out</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>Measured units: 1=dB; 2=dBm; 3=dBuV; 4=SNR (4 supports nf option).</td>
+</tr>
+<tr>
+<td>»» ber</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>Bit error rate: 1=0.1; 2=0.01; 3=0.001; 4=0.0001; 5=0.00001; 6=0.000001; &gt;6=Lora; 7=SF7; 8=SF8; 9=SF9; 10=SF10; 11=SF11; 12=SF12.</td>
+</tr>
+<tr>
+<td>»» mod</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>Modulation: 1=4QAM; 2=16QAM; 3=64QAM; 4=256QAM; 5=1024QAM; 6=BPSK; 7=QPSK; 8=8PSK; 9=16PSK; 10=32PSK; 11=LoRa.</td>
+</tr>
+<tr>
+<td>»» nf</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Noise floor in dBm for use with out=4/SNR.</td>
+</tr>
+<tr>
+<td>»» res</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Resolution in meters for output.</td>
+</tr>
+<tr>
+<td>»» rad</td>
+<td>body</td>
+<td>number(float)</td>
+<td>false</td>
+<td>Radius in kilometers for output.</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>»» ant</td>
+<td>0</td>
+</tr>
+<tr>
+<td>»» ant</td>
+<td>1</td>
+</tr>
+<tr>
+<td>»» pol</td>
+<td>h</td>
+</tr>
+<tr>
+<td>»» pol</td>
+<td>v</td>
+</tr>
+<tr>
+<td>»» ked</td>
+<td>0</td>
+</tr>
+<tr>
+<td>»» ked</td>
+<td>1</td>
+</tr>
+<tr>
+<td>»» units</td>
+<td>metric</td>
+</tr>
+<tr>
+<td>»» units</td>
+<td>imperial</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"kmz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.cloudrf.com/archive/export?sid=YnJETGFWbjZsNDBlNVRQY1phUFFsdz09&amp;fmt=kmz"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"PNG_WGS84"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.cloudrf.com/users/40843/0722102238_Testing_A1.4326.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"PNG_Mercator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.cloudrf.com/users/40843/0722102238_Testing_A1.3857.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bounds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="mf">38.97373</span><span class="p">,</span><span class="w">
+      </span><span class="mf">1.505727</span><span class="p">,</span><span class="w">
+      </span><span class="mf">38.85827</span><span class="p">,</span><span class="w">
+      </span><span class="mf">1.390273</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3930916"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M2ZSaUZuVlVDRno3TTJDTGVqRGJlUT09"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"area"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 km2"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"coverage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0%"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-20dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-24dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-28dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">102</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-32dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">144</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-36dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">185</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-40dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">227</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-44dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">242</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-48dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-52dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">159</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-56dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-60dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-64dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-68dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-72dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">49</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-76dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-80dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">132</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-84dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-88dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">215</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-92dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-96dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">212</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-100dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">171</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-104dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">129</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-108dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">88</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-112dBm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"g"</span><span class="p">:</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"elapsed"</span><span class="p">:</span><span class="w"> </span><span class="mi">3572</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='smtp2go'>SMTP2GO</h2>
+<p>SMTP2GO provides their customers with a dashboard to manage their email campaigns. They also allow users to interact directly with the API that underpins it.</p>
+
+<p>My task was to take a non-spec-compliant API schema (in YAML format) and:</p>
+
+<ul>
+<li>improve the endpoint and schema descriptions</li>
+<li>ensure the API schema complies with Open API 3.0</li>
+<li>provide high-level docs</li>
+</ul>
+
+<p>As is typical with such a project, I was able to identify inconsistencies in logic such as:
+- strings that should be datetime
+- boolean with no type definition to let user know whether to pass 0/1 or True/False</p>
+<h3 id='tools-used-2'>Tools Used</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Redocly</td>
+<td>Consumed the YAML and added Markdown pages for high-level overview material using <a href="https://redoc.ly/">Redoc.ly</a></td>
+</tr>
+<tr>
+<td>Stoplight</td>
+<td>I used Stoplight locally to assist with error identification and ensuring compliance with spec</td>
+</tr>
+<tr>
+<td>Slack</td>
+<td>The main communications channel to chat to the dev assigned to answer all my questions</td>
+</tr>
+<tr>
+<td>GitBash</td>
+<td>For version control via GitHub</td>
+</tr>
+<tr>
+<td>Asana</td>
+<td>For task management</td>
+</tr>
+</tbody></table>
+<h4 id='api-schema-extract-2'>API Schema Extract</h4><h5 id='quick-start'>Quick Start</h5>
+<p>Get started with SMTP2GO&#39;s simple REST API.</p>
+
+<aside class="notice">
+
+These docs support users who wish to integrate with the API. Should you wish to use SMTP, [that is also supported](https://www.smtp2go.com/setup/).
+
+</aside>
+<h4 id='prerequisites'>Prerequisites</h4>
+<p>To make an API call to SMTP2GO, first:</p>
+
+<ul>
+<li><a href="https://www.smtp2go.com/pricing/">create an account</a></li>
+<li><a href="#authenticate">generate a unique API Key</a></li>
+</ul>
+<h5 id='authenticate'>Authenticate</h5>
+<p>Once you have registered for an account, log in to your <a href="https://app.smtp2go.com/login/">control panel</a>.</p>
+
+<aside class="notice">
+Generate an API Key from:
+
+> Control Panel > Settings > API Keys
+
+</aside>
+
+<p>Your API key must be provided in the <code>X-Smtp2go-Api-Key</code> header <strong>and</strong> in the body <code>api_key</code>.</p>
+
+<p>If you are new to using API keys, please consider <a href="#API-key-security">API key security</a>.</p>
+<h4 id='choose-your-region'>Choose your Region</h4>
+<p>Now that you are ready to authenticate, you can:</p>
+
+<ul>
+<li><a href="#base-urls">choose your region</a></li>
+<li>pass the API key in the request headers and in the body</li>
+</ul>
+
+<p>Your options include:</p>
+
+<ul>
+<li>Regionless</li>
+<li>US Region</li>
+<li>EU Region</li>
+</ul>
+
+<p>Your choice of region determines the URL to which you make your API call. For example, to make a request to add senders to your allowed list using the US region, use the path:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>https://us-api.smtp2go.com/v3/allowed_senders/add
+
+</code></pre></div><h2 id='smtp2go-public-api'>SMTP2GO Public API</h2>
+<p>SMTP2GO Public API Schema v3.0. Integrate with SMTP2GO Systems.</p>
+
+<aside class="notice">
+
+Scroll down for code samples, example requests, and responses.
+
+</aside>
+<h3 id='base-urls-2'>Base URLs:</h3>
+<ul>
+<li><p><a href="https://api.smtp2go.com/v3">https://api.smtp2go.com/v3</a></p></li>
+<li><p><a href="https://us-api.smtp2go.com/v3">https://us-api.smtp2go.com/v3</a></p></li>
+<li><p><a href="https://eu-api.smtp2go.com/v3">https://eu-api.smtp2go.com/v3</a></p></li>
+</ul>
+
+<p>Email: <a href="mailto:ticket@smtp2go.com">SMTP2GO Support</a> Web: <a href="https://support.smtp2go.com">SMTP2GO Support</a>
+License: <a href="https://support.smtp2go.com/">Apache 2.0</a></p>
+<h3 id='authentication-2'>Authentication</h3>
+<ul>
+<li>API Key (APIKeyHeader)
+
+<ul>
+<li>Parameter Name: <strong>X-Smtp2go-Api-Key</strong>, in: header and in the body <code>api_key</code>.</li>
+</ul></li>
+</ul>
+
+<h2 id="smtp2go-public-api-v3-0-0-activity">Activity</h2>
+
+<p>A POST command allows you to search the activity stream. Select individual field/s to search, such as <code>start_date</code>, or utilise the <code>search</code> field to search across all fields.</p>
+<h2 id='postactivitysearch'>postActivitySearch</h2>
+<p><a id="opIdpostActivitySearch"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> POST https://api.smtp2go.com/v3/activity/search <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'X-Smtp2go-Api-Key: API_KEY'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.smtp2go.com/v3/activity/search</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.smtp2go.com</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
+  "api_key": "api-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "start_date": "2021-04-20T00:00:00",
+  "end_date": "2021-04-21T00:00:00",
+  "search": "string",
+  "search_subject": "string",
+  "search_sender": "string",
+  "search_recipient": "string",
+  "search_usernames": "string",
+  "limit": 0,
+  "continue_token": "string",
+  "only_latest": false,
+  "event_types": [
+    "processed"
+  ]
+}</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">X-Smtp2go-Api-Key</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">API_KEY</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.smtp2go.com/v3/activity/search</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'X-Smtp2go-Api-Key'</span> <span class="o">=&gt;</span> <span class="s1">'API_KEY'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api.smtp2go.com/v3/activity/search'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'X-Smtp2go-Api-Key'</span><span class="p">:</span> <span class="s">'API_KEY'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.smtp2go.com/v3/activity/search'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+    <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+    <span class="s1">'X-Smtp2go-Api-Key'</span> <span class="o">=&gt;</span> <span class="s1">'API_KEY'</span><span class="p">,</span>
+<span class="p">);</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">GuzzleHttp\Client</span><span class="p">();</span>
+
+<span class="c1">// Define array of request body.</span>
+<span class="nv">$request_body</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">request</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">,</span><span class="s1">'https://api.smtp2go.com/v3/activity/search'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'headers'</span> <span class="o">=&gt;</span> <span class="nv">$headers</span><span class="p">,</span>
+        <span class="s1">'json'</span> <span class="o">=&gt;</span> <span class="nv">$request_body</span><span class="p">,</span>
+       <span class="p">)</span>
+    <span class="p">);</span>
+    <span class="nb">print_r</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">getContents</span><span class="p">());</span>
+ <span class="p">}</span>
+ <span class="k">catch</span> <span class="p">(</span><span class="err">\</span><span class="nc">GuzzleHttp\Exception\BadResponseException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle exception or api errors.</span>
+    <span class="nb">print_r</span><span class="p">(</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="nf">getMessage</span><span class="p">());</span>
+ <span class="p">}</span>
+
+ <span class="c1">// ...</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.smtp2go.com/v3/activity/search"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+       <span class="s">"bytes"</span>
+       <span class="s">"net/http"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">headers</span> <span class="o">:=</span> <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="kt">string</span><span class="p">{</span>
+        <span class="s">"Content-Type"</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"application/json"</span><span class="p">},</span>
+        <span class="s">"Accept"</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"application/json"</span><span class="p">},</span>
+        <span class="s">"X-Smtp2go-Api-Key"</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"API_KEY"</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"https://api.smtp2go.com/v3/activity/search"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
+
+    <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
+    <span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">client</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+    <span class="c">// ...</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id='api-key-security'>API key security</h2>
+<p>It is important to keep your API key secure. Publicly exposing your key can compromise your account, which could result in unexpected charges. To keep your API keys secure, follow these best practices:</p>
+
+<ul>
+<li>Store API keys as environment variables</li>
+</ul>
+
+<aside class="warning">
+Do not embed API keys directly in code. API keys that are embedded in code can be accidentally exposed outside your circle of trust.
+</aside>
+
+<ul>
+<li>If you store API keys in files, store those files outside your application&#39;s source tree.</li>
+</ul>
+
+<aside class="notice">
+This helps to ensure that your keys do not end up in your source code control system. This is particularly important if you use a public source code management system such as GitHub.
+</aside>
+<h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
