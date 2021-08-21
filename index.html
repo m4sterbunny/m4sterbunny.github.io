@@ -346,6 +346,25 @@
               </ul>
           </li>
           <li>
+            <a href="#client-2" class="toc-h1 toc-link" data-title="Client">Client</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#faria" class="toc-h2 toc-link" data-title="Faria">Faria</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#authentication-3" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#api-v2-year-groups" class="toc-h1 toc-link" data-title="Year Groups">Year Groups</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-year-groups" class="toc-h2 toc-link" data-title="Get all Year Groups">Get all Year Groups</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -1334,7 +1353,201 @@ Do not embed API keys directly in code. API keys that are embedded in code can b
 <aside class="notice">
 This helps to ensure that your keys do not end up in your source code control system. This is particularly important if you use a public source code management system such as GitHub.
 </aside>
-<h1 id='errors'>Errors</h1>
+<h1 id='client-2'>Client</h1><h2 id='faria'>Faria</h2>
+<p><a href="https://www.faria.org/">Faria</a> provides its customers with a dashboard SaaS to manage vital aspect of School Administration from applications through to lessons and class management. Faria&#39;s many products are supported by unique API sets.</p>
+
+<p>My task was to:</p>
+
+<ul>
+<li>identify a platform that could support multi-level user access including an SSO</li>
+<li>assist with implementing the platform</li>
+<li>advocate for a &quot;docs as code&quot; philosphy</li>
+<li>create high-level user documentation based on often out-of-date, and conflicting PDF guides</li>
+<li>improve the endpoint and schema descriptions for 5 APIs that support various dashboards</li>
+<li>ensure the API schemas comply with Open API 3.0</li>
+</ul>
+
+<aside class="notice">
+Faria's project was particularly challenging due to the access control requirements. Some APIs are going to be available to clients, while others remain private to Faria developers. Faria's CTO wanted a single portal to manage this control pattern.
+
+Also, the API team were not familiar with exposing their API documentation outside of their local teams.
+</aside>
+<h3 id='tools-used-3'>Tools Used</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Redocly</td>
+<td>I cleaned the API YAML files and provided them to the Redocly build for consumption. I also populated several high-level overview pages for partners, developers, and external clients; written in Markdown</td>
+</tr>
+<tr>
+<td>Rswag</td>
+<td>I identified an automated tool that allowed the dev teams to extract a Swagger-compliant YAML directly from their Ruby code-base</td>
+</tr>
+<tr>
+<td>Spectral</td>
+<td>I proposed that Spectral be setup with webhooks to automatically verify adherence to spec as a new YAML file is generated</td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td>I joined the Faria.org GitHub organisation to enable me to have access to the various repos including the documentation site</td>
+</tr>
+<tr>
+<td>GitBash</td>
+<td>For version control via GitHub</td>
+</tr>
+</tbody></table>
+<h4 id='api-schema-extract-3'>API Schema Extract</h4>
+<p>This API set Orchestrates Faria Services Manager and School Administration with the ManageBac GUI.</p>
+
+<p>Base URLs:</p>
+
+<ul>
+<li><p><a href="https://api.devel.managebac.com">https://api.devel.managebac.com</a></p></li>
+<li><p><a href="https://api.{server}">https://api.{server}</a></p>
+
+<ul>
+<li><p><strong>server</strong> -  Default: devel.managebac.com</p>
+
+<ul>
+<li>devel.managebac.com</li>
+<li>managebac.dev</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>Email: <a href="mailto:hello@managebac.com">Faria International School</a> Web: <a href="https://www.faria.org/support">Faria International School</a></p>
+<h1 id='authentication-3'>Authentication</h1>
+<ul>
+<li><p>API Key (authTokenQuery)</p>
+
+<ul>
+<li>Parameter Name: <strong>auth_token</strong>, in: query. Your V2 API authentication token may be passed in the parameters.</li>
+</ul></li>
+<li><p>API Key (authTokenHeader)</p>
+
+<ul>
+<li>Parameter Name: <strong>auth-token</strong>, in: header. Your V2 API authentication token may be passed in the header.</li>
+</ul></li>
+</ul>
+
+<p>To protect your key, use <a href="api-key-security">environment variables</a>.</p>
+
+<h1 id="api-v2-year-groups">Year Groups</h1>
+
+<p>This documentation describes all the APIs relating to year groups.</p>
+<h2 id='get-all-year-groups'>Get all Year Groups</h2>
+<p><a id="opIdlistYearGroups"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.devel.managebac.com/v2/year-groups'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.devel.managebac.com/v2/year-groups'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.devel.managebac.com/v2/year-groups</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.devel.managebac.com</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+
+</code></pre></div>
+<p><code>GET /v2/year-groups</code></p>
+
+<p>This endpoint retrieves the basic information of all Year Groups. It returns the group name, program, grade level and student IDs for members.<b> Note:</b> <code>/v2/ib-groups</code> endpoints have been deprecated in favor of <code>/v2/year-groups</code> endpoints and will be removed completely by the end of 2021.</p>
+
+<h3 id="get-all-year-groups-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>modified_since</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>A timestamp to filter results by modification date.</td>
+</tr>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>An integer defining which page to display.</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>An integer defining the number of records to display per page.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"year_groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10907398</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IB Diploma Group of 2019 (Grade 12)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IB Diploma"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grade 12"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"grade_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"student_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">10193652</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11076103</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IB MYP Group of 2019 (Year 4)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IB Middle Years"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Year 4"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"grade_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"student_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">12459565</span><span class="p">,</span><span class="w">
+        </span><span class="mi">11456849</span><span class="p">,</span><span class="w">
+        </span><span class="mi">12068809</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
