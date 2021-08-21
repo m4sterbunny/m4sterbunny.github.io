@@ -1085,7 +1085,8 @@ Cloud RF's api creates electromagnetic and geospacial modelling to assist with p
 
 <p>As is typical with such a project, I was able to identify inconsistencies in logic such as:
 - strings that should be datetime
-- boolean with no type definition to let user know whether to pass 0/1 or True/False</p>
+- boolean with no type definition to let user know whether to pass 0/1 or True/False
+- allOf that should be anyOf</p>
 <h3 id='tools-used-2'>Tools Used</h3>
 <table><thead>
 <tr>
@@ -1547,7 +1548,13 @@ Also, the API team were not familiar with exposing their API documentation outsi
     </span><span class="nl">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h1 id='errors'>Errors</h1>
+</span></code></pre></div>
+<aside class="notice">
+Unique toFaria's project was particularly challenging due to the access control requirements. Some APIs are going to be available to clients, while others remain private to Faria developers. Faria's CTO wanted a single portal to manage this control pattern.
+
+Also, the API team were not familiar with exposing their API documentation outside of their local teams.
+</aside>
+<h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
