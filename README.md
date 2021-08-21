@@ -1,3 +1,12 @@
+```
+bundle exec middleman server
+```
+you should see your docs at http://localhost:4567
+
+--------
+{https://github.com/slatedocs/slate/wiki/Deploying-Slate](https://github.com/slatedocs/slate/wiki/Deploying-Slate)
+------------
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/slatedocs/img/main/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
   <br>
