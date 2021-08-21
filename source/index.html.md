@@ -712,3 +712,162 @@ Do not embed API keys directly in code. API keys that are embedded in code can b
 This helps to ensure that your keys do not end up in your source code control system. This is particularly important if you use a public source code management system such as GitHub.
 </aside>
 
+# Client
+
+## Faria
+
+[Faria](https://www.faria.org/) provides its customers with a dashboard SaaS to manage vital aspect of School Administration from applications through to lessons and class management. Faria's many products are supported by unique API sets.
+
+My task was to:
+
+- identify a platform that could support multi-level user access including an SSO
+- assist with implementing the platform
+- advocate for a "docs as code" philosphy
+- create high-level user documentation based on often out-of-date, and conflicting PDF guides
+- improve the endpoint and schema descriptions for 5 APIs that support various dashboards
+- ensure the API schemas comply with Open API 3.0
+
+
+<aside class="notice">
+Faria's project was particularly challenging due to the access control requirements. Some APIs are going to be available to clients, while others remain private to Faria developers. Faria's CTO wanted a single portal to manage this control pattern.
+
+Also, the API team were not familiar with exposing their API documentation outside of their local teams.
+</aside>
+
+
+### Tools Used
+
+Parameter | Description
+--------- | -----------
+Redocly | I cleaned the API YAML files and provided them to the Redocly build for consumption. I also populated several high-level overview pages for partners, developers, and external clients; written in Markdown
+Rswag | I identified an automated tool that allowed the dev teams to extract a Swagger-compliant YAML directly from their Ruby code-base
+Spectral | I proposed that Spectral be setup with webhooks to automatically verify adherence to spec as a new YAML file is generated
+GitHub | I joined the Faria.org GitHub organisation to enable me to have access to the various repos including the documentation site
+GitBash | For version control via GitHub
+
+
+#### API Schema Extract
+
+This API set Orchestrates Faria Services Manager and School Administration with the ManageBac GUI.
+
+Base URLs:
+
+* <a href="https://api.devel.managebac.com">https://api.devel.managebac.com</a>
+
+* <a href="https://api.{server}">https://api.{server}</a>
+
+    * **server** -  Default: devel.managebac.com
+
+        * devel.managebac.com
+
+        * managebac.dev
+
+Email: <a href="mailto:hello@managebac.com">Faria International School</a> Web: <a href="https://www.faria.org/support">Faria International School</a>
+
+# Authentication
+
+* API Key (authTokenQuery)
+    - Parameter Name: **auth_token**, in: query. Your V2 API authentication token may be passed in the parameters.
+
+* API Key (authTokenHeader)
+    - Parameter Name: **auth-token**, in: header. Your V2 API authentication token may be passed in the header.
+
+To protect your key, use [environment variables](api-key-security).
+
+<h1 id="api-v2-year-groups">Year Groups</h1>
+
+This documentation describes all the APIs relating to year groups.
+
+## Get all Year Groups
+
+<a id="opIdlistYearGroups"></a>
+
+> Code samples
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.devel.managebac.com/v2/year-groups',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.devel.managebac.com/v2/year-groups', headers = headers)
+
+print(r.json())
+
+```
+
+```http
+GET https://api.devel.managebac.com/v2/year-groups HTTP/1.1
+Host: api.devel.managebac.com
+Accept: application/json
+
+```
+
+`GET /v2/year-groups`
+
+This endpoint retrieves the basic information of all Year Groups. It returns the group name, program, grade level and student IDs for members.<b> Note:</b> <code>/v2/ib-groups</code> endpoints have been deprecated in favor of <code>/v2/year-groups</code> endpoints and will be removed completely by the end of 2021.
+
+<h3 id="get-all-year-groups-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|modified_since|query|string|false|A timestamp to filter results by modification date.|
+|page|query|string|false|An integer defining which page to display.|
+|per_page|query|string|false|An integer defining the number of records to display per page.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "year_groups": [
+    {
+      "id": 10907398,
+      "name": "IB Diploma Group of 2019 (Grade 12)",
+      "program": "IB Diploma",
+      "grade": "Grade 12",
+      "grade_number": 13,
+      "student_ids": [
+        10193652
+      ]
+    },
+    {
+      "id": 11076103,
+      "name": "IB MYP Group of 2019 (Year 4)",
+      "program": "IB Middle Years",
+      "grade": "Year 4",
+      "grade_number": 10,
+      "student_ids": [
+        12459565,
+        11456849,
+        12068809
+      ]
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "total_pages": 1,
+    "total_count": 2,
+    "per_page": 100
+  }
+}
+```
+
+
