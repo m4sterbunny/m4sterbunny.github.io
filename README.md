@@ -1,3 +1,25 @@
+### Slate with Docker container
+
+NB Setup docker for cmd on Windows
+1. Upgraded to WSL2
+2. Installed docker desktop
+
+Then need to start a docker service -- at root of slate repo:
+
+```
+docker run slatedocs/slate
+
+```
+This works BUT now need my image to be the source ...
+
+```
+docker run --name slate2 -v "C:\Users\bunny\Documents\GitHub\API-Demo-Extracts\slate\build:/srv/slate/build" -v "C:\Users\bunny\Documents\GitHub\API-Demo-Extracts\slate\source:/srv/slate/source" slatedocs/slate
+
+```
+NB Docker holds onto container names even if they are not running -- hence the increment
+
+### Slate served locally
+
 ```
 bundle exec middleman server
 ```
