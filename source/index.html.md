@@ -8,18 +8,17 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - <a href='https://www.fiverr.com/harrieb'>Fiver Pro Profile</a>
+  - <a href='https://www.upwork.com/freelancers/~0111e0b1f1b6c5d8d4'>Upwork Profile</a>
 
-includes:
-  - errors
+headingLevel: 3
 
 search: true
 
 code_clipboard: true
 ---
 
-# Introduction
+# API Showcase
 
 Welcome to my API documentation demo site.
 
@@ -27,10 +26,19 @@ Welcome to my API documentation demo site.
 Some clients have API schemas that will become public, others have gated API documention. Even clients that intend their API schema to be made public may not want to do so until the full review cycle is complete. This showcase represents my solution to both challenges.
 </aside>
 
+<aside class="warning">
+Note that different styles may be applied to the written English according to client preferences. Expect:
 
-# Client
+- UK *and* US English
+- A stop to end descriptions.
+- No stop
+- Oxford comma/none
 
-## Cloud RF-API
+</aside>
+
+## Client 1: Cloud RF
+
+####  About Cloud RF
 
 [Cloud RF](https://docs.cloudrf.com/) provides its customers with a dashboard SaaS and direct access to the API that underpins it. My task was to take a non-spec-compliant API schema (in YAML format) and:
 
@@ -40,6 +48,7 @@ Some clients have API schemas that will become public, others have gated API doc
 - start high-level docs
 
 As is typical with such a project, I was able to identify inconsistencies in logic such as:
+
 - default value that lay outside of min/max value
 - integer that should be a float
 
@@ -83,7 +92,9 @@ Email: <a href="mailto:support@cloudrf.com">Support</a>
 
 This set of endpoints allows the user to create new links, site heatmaps, routes, and networks.
 
-###### Create a point-to-multipoint heatmap
+###### Endpoint Example
+
+Create a point-to-multipoint heatmap
 
 <a id="opIdarea"></a>
 
@@ -415,7 +426,9 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 ```
 
 
-## SMTP2GO
+## Client 2: SMTP2GO
+
+#### About SMTP2GO
 
 SMTP2GO provides their customers with a dashboard to manage their email campaigns. They also allow users to interact directly with the API that underpins it.
 
@@ -427,7 +440,7 @@ My task was to take a non-spec-compliant API schema (in YAML format) and:
 
 As is typical with such a project, I was able to identify inconsistencies in logic such as:
 - strings that should be datetime
-- boolean with no type definition to let user know whether to pass 0/1 or True/False
+- boolean with no example to let user know whether to pass 0/1 or True/False
 - allOf that should be anyOf
 
 
@@ -435,14 +448,14 @@ As is typical with such a project, I was able to identify inconsistencies in log
 
 Parameter | Description
 --------- | -----------
-Redocly | Consumed the YAML and added Markdown pages for high-level overview material using [Redoc.ly](https://redoc.ly/)
+Slate | Cleaned up the YAML, converted it to JSON, used Widdershins to convert the shema to Markdown and added Markdown pages for high-level overview material in Slate
 Stoplight | I used Stoplight locally to assist with error identification and ensuring compliance with spec
 Slack | The main communications channel to chat to the dev assigned to answer all my questions
 GitBash | For version control via GitHub
 Asana | For task management
 
 
-#### API Schema Extract
+#### API Overview Extract
 
 ##### Quick Start
 
@@ -497,8 +510,9 @@ https://us-api.smtp2go.com/v3/allowed_senders/add
 
 ```
 
+#### API Schema Extract
 
-## SMTP2GO Public API
+##### SMTP2GO Public API
 
 SMTP2GO Public API Schema v3.0. Integrate with SMTP2GO Systems.
 
@@ -508,7 +522,7 @@ Scroll down for code samples, example requests, and responses.
 
 </aside>
 
-### Base URLs:
+###### Base URLs:
 
 * <a href="https://api.smtp2go.com/v3">https://api.smtp2go.com/v3</a>
 
@@ -519,7 +533,7 @@ Scroll down for code samples, example requests, and responses.
 Email: <a href="mailto:ticket@smtp2go.com">SMTP2GO Support</a> Web: <a href="https://support.smtp2go.com">SMTP2GO Support</a>
 License: <a href="https://support.smtp2go.com/">Apache 2.0</a>
 
-### Authentication
+###### Authentication
 
 * API Key (APIKeyHeader)
     - Parameter Name: **X-Smtp2go-Api-Key**, in: header and in the body `api_key`.
@@ -528,7 +542,7 @@ License: <a href="https://support.smtp2go.com/">Apache 2.0</a>
 
 A POST command allows you to search the activity stream. Select individual field/s to search, such as `start_date`, or utilise the `search` field to search across all fields.
 
-## postActivitySearch
+###### postActivitySearch
 
 <a id="opIdpostActivitySearch"></a>
 
@@ -697,7 +711,7 @@ func main() {
 
 ```
 
-## API key security
+#### API key security
 
 It is important to keep your API key secure. Publicly exposing your key can compromise your account, which could result in unexpected charges. To keep your API keys secure, follow these best practices:
 
@@ -713,9 +727,9 @@ Do not embed API keys directly in code. API keys that are embedded in code can b
 This helps to ensure that your keys do not end up in your source code control system. This is particularly important if you use a public source code management system such as GitHub.
 </aside>
 
-# Client
+## Client 3: Faria
 
-## Faria
+#### About Faria
 
 [Faria](https://www.faria.org/) provides its customers with a dashboard SaaS to manage vital aspect of School Administration from applications through to lessons and class management. Faria's many products are supported by unique API sets.
 
