@@ -450,24 +450,20 @@ Asana | For task management
 
 ### API Overview Extract
 
-#### Quick Start
+### Quick Start
 
 Get started with SMTP2GO's simple REST API.
 
-<aside class="notice">
-
 These docs support users who wish to integrate with the API. Should you wish to use SMTP, [that is also supported](https://www.smtp2go.com/setup/).
 
-</aside>
-
-#### Prerequisites
+### Prerequisites
 
 To make an API call to SMTP2GO, first:
 
 - [create an account](https://www.smtp2go.com/pricing/)
 - [generate a unique API Key](#authenticate)
 
-##### Authenticate
+### Authenticate
 
 Once you have registered for an account, log in to your [control panel](https://app.smtp2go.com/login/).
 
@@ -758,21 +754,13 @@ GitBash | For version control via GitHub
 
 This API set Orchestrates Faria Services Manager and School Administration with the ManageBac GUI.
 
-Base URLs:
+Base URL:
 
 * <a href="https://api.devel.managebac.com">https://api.devel.managebac.com</a>
 
-* <a href="https://api.{server}">https://api.{server}</a>
-
-    * **server** -  Default: devel.managebac.com
-
-        * devel.managebac.com
-
-        * managebac.dev
-
 Email: <a href="mailto:hello@managebac.com">Faria International School</a> Web: <a href="https://www.faria.org/support">Faria International School</a>
 
-### Authentication
+#### Authentication
 
 * API Key (authTokenQuery)
     - Parameter Name: **auth_token**, in: query. Your V2 API authentication token may be passed in the parameters.
@@ -783,7 +771,7 @@ Email: <a href="mailto:hello@managebac.com">Faria International School</a> Web: 
 To protect your key, use [environment variables](api-key-security).
 
 
-## Get all Year Groups
+### Get all Year Groups
 
 <a id="opIdlistYearGroups"></a>
 
@@ -875,13 +863,10 @@ This endpoint retrieves the basic information of all Year Groups. It returns the
 }
 ```
 
-<aside class="notice">
 Faria's needs were/are unusual in that I was the more experienced member of the team in terms of API documentation. This meant not only did I have to identify the tooling for the developers to use, I also had to advocate for best practice. I supported the various development teams (there are different teams working on each Faria product):
 
 - By writing up how the first individual implemented a new tool and sharing code samples (e.g. Rswag and Spectral)
-  - I had greater visibility over the project with access to all the API codebase repos, something the developers did not have
 - By advocating for CICD practices; now when developers make upstream changes a build is triggered downstream on the documentation site
 - By becoming the in-house "expert" on Redoc.ly (there is a limit to this and I am very clear to everyone involved that I am not a dev!).
-</aside>
 
 
