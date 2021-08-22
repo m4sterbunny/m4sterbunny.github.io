@@ -23,7 +23,7 @@ code_clipboard: true
 Welcome to my API documentation demo site.
 
 <aside class="notice">
-Some clients have API schemas that will become public, others have gated API documention. Even clients that intend their API schema to be made public may not want to do so until the full review cycle is complete. This showcase represents my solution to both challenges.
+Some clients have API schemas that will become public, others have gated API documentation. Even clients that intend their API schema to be made public may not want to do so until the full review cycle is complete. This showcase represents my solution to both challenges.
 </aside>
 
 Note that different styles may be applied to the written English according to client preferences. Expect:
@@ -34,7 +34,7 @@ Note that different styles may be applied to the written English according to cl
 - Oxford comma/none
 
 
-## Client 1: Cloud RF
+# Client 1: Cloud RF
 
 ####  About Cloud RF
 
@@ -126,13 +126,12 @@ print(r.json())
 
 ```
 
-```http
+#### Cloud RF API
 POST https://api.cloudrf.com/area HTTP/1.1
 Host: api.cloudrf.com
 Content-Type: application/json
 Accept: application/json
 
-```
 
 `POST /area`
 
@@ -420,7 +419,7 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 ```
 
 
-## Client 2: SMTP2GO
+# Client 2: SMTP2GO
 
 ### About SMTP2GO
 
@@ -721,7 +720,7 @@ Do not embed API keys directly in code. API keys that are embedded in code can b
 This helps to ensure that your keys do not end up in your source code control system. This is particularly important if you use a public source code management system such as GitHub.
 </aside>
 
-## Client 3: Faria
+# Client 3: Faria
 
 ### About Faria
 
@@ -773,7 +772,7 @@ Base URLs:
 
 Email: <a href="mailto:hello@managebac.com">Faria International School</a> Web: <a href="https://www.faria.org/support">Faria International School</a>
 
-# Authentication
+### Authentication
 
 * API Key (authTokenQuery)
     - Parameter Name: **auth_token**, in: query. Your V2 API authentication token may be passed in the parameters.
