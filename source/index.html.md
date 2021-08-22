@@ -26,7 +26,6 @@ Welcome to my API documentation demo site.
 Some clients have API schemas that will become public, others have gated API documention. Even clients that intend their API schema to be made public may not want to do so until the full review cycle is complete. This showcase represents my solution to both challenges.
 </aside>
 
-<aside class="warning">
 Note that different styles may be applied to the written English according to client preferences. Expect:
 
 - UK *and* US English
@@ -34,7 +33,6 @@ Note that different styles may be applied to the written English according to cl
 - No stop
 - Oxford comma/none
 
-</aside>
 
 ## Client 1: Cloud RF
 
@@ -68,12 +66,12 @@ GitHub | The main communications channel via PRs
 GitBash | For version control via GitHub
 
 
-#### API Schema Extract
+### API Schema Extract
 
-##### Introduction
+### Introduction
 The Cloud-RF API enables users to model and test radio propagation for any radio, anywhere. Authenticate by passing your API2.0 key in the request header as `key`. Set up a [CloudRF.com](https://cloudrf.com/my-account) account to generate this key. All data is transferred as JSON. For detailed documentation, visit [docs.cloudrf.com](https://docs.cloudrf.com).
 
-##### Base URLs:
+### Base URLs:
 
 * <a href="https://api.cloudrf.com">https://api.cloudrf.com</a>
 
@@ -83,16 +81,12 @@ Terms of service</a>
 
 Email: <a href="mailto:support@cloudrf.com">Support</a>
 
-##### Authentication
+### Authentication
 
 * API Key (ApiKeyAuth)
     - Parameter Name: **key**, in: header. An APIKey passed in the request headers.
 
-<h1 id="cloud-rf-api-create">Create</h1>
-
-This set of endpoints allows the user to create new links, site heatmaps, routes, and networks.
-
-###### Endpoint Example
+#### Endpoint Example
 
 Create a point-to-multipoint heatmap
 
@@ -428,7 +422,7 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 
 ## Client 2: SMTP2GO
 
-#### About SMTP2GO
+### About SMTP2GO
 
 SMTP2GO provides their customers with a dashboard to manage their email campaigns. They also allow users to interact directly with the API that underpins it.
 
@@ -455,9 +449,9 @@ GitBash | For version control via GitHub
 Asana | For task management
 
 
-#### API Overview Extract
+### API Overview Extract
 
-##### Quick Start
+#### Quick Start
 
 Get started with SMTP2GO's simple REST API.
 
@@ -510,9 +504,9 @@ https://us-api.smtp2go.com/v3/allowed_senders/add
 
 ```
 
-#### API Schema Extract
+### API Schema Extract
 
-##### SMTP2GO Public API
+#### SMTP2GO Public API
 
 SMTP2GO Public API Schema v3.0. Integrate with SMTP2GO Systems.
 
@@ -522,7 +516,7 @@ Scroll down for code samples, example requests, and responses.
 
 </aside>
 
-###### Base URLs:
+#### Base URLs:
 
 * <a href="https://api.smtp2go.com/v3">https://api.smtp2go.com/v3</a>
 
@@ -533,16 +527,16 @@ Scroll down for code samples, example requests, and responses.
 Email: <a href="mailto:ticket@smtp2go.com">SMTP2GO Support</a> Web: <a href="https://support.smtp2go.com">SMTP2GO Support</a>
 License: <a href="https://support.smtp2go.com/">Apache 2.0</a>
 
-###### Authentication
+### Authentication
 
 * API Key (APIKeyHeader)
     - Parameter Name: **X-Smtp2go-Api-Key**, in: header and in the body `api_key`.
 
-<h2 id="smtp2go-public-api-v3-0-0-activity">Activity</h2>
+<h4 id="smtp2go-public-api-v3-0-0-activity">Activity</h4>
 
 A POST command allows you to search the activity stream. Select individual field/s to search, such as `start_date`, or utilise the `search` field to search across all fields.
 
-###### postActivitySearch
+#### postActivitySearch
 
 <a id="opIdpostActivitySearch"></a>
 
@@ -711,7 +705,7 @@ func main() {
 
 ```
 
-#### API key security
+### API key security
 
 It is important to keep your API key secure. Publicly exposing your key can compromise your account, which could result in unexpected charges. To keep your API keys secure, follow these best practices:
 
@@ -729,7 +723,7 @@ This helps to ensure that your keys do not end up in your source code control sy
 
 ## Client 3: Faria
 
-#### About Faria
+### About Faria
 
 [Faria](https://www.faria.org/) provides its customers with a dashboard SaaS to manage vital aspect of School Administration from applications through to lessons and class management. Faria's many products are supported by unique API sets.
 
@@ -789,9 +783,6 @@ Email: <a href="mailto:hello@managebac.com">Faria International School</a> Web: 
 
 To protect your key, use [environment variables](api-key-security).
 
-<h1 id="api-v2-year-groups">Year Groups</h1>
-
-This documentation describes all the APIs relating to year groups.
 
 ## Get all Year Groups
 
@@ -886,7 +877,12 @@ This endpoint retrieves the basic information of all Year Groups. It returns the
 ```
 
 <aside class="notice">
-Unique toFaria's project was particularly challenging due to the access control requirements. Some APIs are going to be available to clients, while others remain private to Faria developers. Faria's CTO wanted a single portal to manage this control pattern.
+Faria's needs were/are unusual in that I was the more experienced member of the team in terms of API documentation. This meant not only did I have to identify the tooling for the developers to use, I also had to advocate for best practice. I supported the various development teams (there are different teams working on each Faria product):
 
-Also, the API team were not familiar with exposing their API documentation outside of their local teams.
+- By writing up how the first individual implemented a new tool and sharing code samples (e.g. Rswag and Spectral)
+  - I had greater visibility over the project with access to all the API codebase repos, something the developers did not have
+- By advocating for CICD practices; now when developers make upstream changes a build is triggered downstream on the documentation site
+- By becoming the in-house "expert" on Redoc.ly (there is a limit to this and I am very clear to everyone involved that I am not a dev!).
 </aside>
+
+

@@ -317,19 +317,8 @@
                   <li>
                     <a href="#client-1-cloud-rf" class="toc-h2 toc-link" data-title="Client 1: Cloud RF">Client 1: Cloud RF</a>
                   </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#cloud-rf-api-create" class="toc-h1 toc-link" data-title="Create">Create</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#create-a-point-to-multipoint-heatmap-parameters" class="toc-h2 toc-link" data-title="Parameters">Parameters</a>
-                  </li>
                   <li>
                     <a href="#client-2-smtp2go" class="toc-h2 toc-link" data-title="Client 2: SMTP2GO">Client 2: SMTP2GO</a>
-                  </li>
-                  <li>
-                    <a href="#smtp2go-public-api-v3-0-0-activity" class="toc-h2 toc-link" data-title="Activity">Activity</a>
                   </li>
                   <li>
                     <a href="#client-3-faria" class="toc-h2 toc-link" data-title="Client 3: Faria">Client 3: Faria</a>
@@ -338,9 +327,6 @@
           </li>
           <li>
             <a href="#authentication-3" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#api-v2-year-groups" class="toc-h1 toc-link" data-title="Year Groups">Year Groups</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-all-year-groups" class="toc-h2 toc-link" data-title="Get all Year Groups">Get all Year Groups</a>
@@ -363,15 +349,14 @@
 Some clients have API schemas that will become public, others have gated API documention. Even clients that intend their API schema to be made public may not want to do so until the full review cycle is complete. This showcase represents my solution to both challenges.
 </aside>
 
-<aside class="warning">
-Note that different styles may be applied to the written English according to client preferences. Expect:
+<p>Note that different styles may be applied to the written English according to client preferences. Expect:</p>
 
-- UK *and* US English
-- A stop to end descriptions.
-- No stop
-- Oxford comma/none
-
-</aside>
+<ul>
+<li>UK <em>and</em> US English</li>
+<li>A stop to end descriptions.</li>
+<li>No stop</li>
+<li>Oxford comma/none</li>
+</ul>
 <h2 id='client-1-cloud-rf'>Client 1: Cloud RF</h2><h4 id='about-cloud-rf'>About Cloud RF</h4>
 <p><a href="https://docs.cloudrf.com/">Cloud RF</a> provides its customers with a dashboard SaaS and direct access to the API that underpins it. My task was to take a non-spec-compliant API schema (in YAML format) and:</p>
 
@@ -416,9 +401,9 @@ Cloud RF's api creates electromagnetic and geospacial modelling to assist with p
 <td>For version control via GitHub</td>
 </tr>
 </tbody></table>
-<h4 id='api-schema-extract'>API Schema Extract</h4><h5 id='introduction'>Introduction</h5>
+<h3 id='api-schema-extract'>API Schema Extract</h3><h3 id='introduction'>Introduction</h3>
 <p>The Cloud-RF API enables users to model and test radio propagation for any radio, anywhere. Authenticate by passing your API2.0 key in the request header as <code>key</code>. Set up a <a href="https://cloudrf.com/my-account">CloudRF.com</a> account to generate this key. All data is transferred as JSON. For detailed documentation, visit <a href="https://docs.cloudrf.com">docs.cloudrf.com</a>.</p>
-<h5 id='base-urls'>Base URLs:</h5>
+<h3 id='base-urls'>Base URLs:</h3>
 <ul>
 <li><a href="https://api.cloudrf.com">https://api.cloudrf.com</a></li>
 </ul>
@@ -428,7 +413,7 @@ Cloud RF's api creates electromagnetic and geospacial modelling to assist with p
 <p>Terms of service</a></p>
 
 <p>Email: <a href="mailto:support@cloudrf.com">Support</a></p>
-<h5 id='authentication'>Authentication</h5>
+<h3 id='authentication'>Authentication</h3>
 <ul>
 <li>API Key (ApiKeyAuth)
 
@@ -436,11 +421,7 @@ Cloud RF's api creates electromagnetic and geospacial modelling to assist with p
 <li>Parameter Name: <strong>key</strong>, in: header. An APIKey passed in the request headers.</li>
 </ul></li>
 </ul>
-
-<h1 id="cloud-rf-api-create">Create</h1>
-
-<p>This set of endpoints allows the user to create new links, site heatmaps, routes, and networks.</p>
-<h6 id='endpoint-example'>Endpoint Example</h6>
+<h4 id='endpoint-example'>Endpoint Example</h4>
 <p>Create a point-to-multipoint heatmap</p>
 
 <p><a id="opIdarea"></a></p>
@@ -1067,7 +1048,7 @@ Cloud RF's api creates electromagnetic and geospacial modelling to assist with p
   </span><span class="nl">"elapsed"</span><span class="p">:</span><span class="w"> </span><span class="mi">3572</span><span class="p">,</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='client-2-smtp2go'>Client 2: SMTP2GO</h2><h4 id='about-smtp2go'>About SMTP2GO</h4>
+</span></code></pre></div><h2 id='client-2-smtp2go'>Client 2: SMTP2GO</h2><h3 id='about-smtp2go'>About SMTP2GO</h3>
 <p>SMTP2GO provides their customers with a dashboard to manage their email campaigns. They also allow users to interact directly with the API that underpins it.</p>
 
 <p>My task was to take a non-spec-compliant API schema (in YAML format) and:</p>
@@ -1110,7 +1091,7 @@ Cloud RF's api creates electromagnetic and geospacial modelling to assist with p
 <td>For task management</td>
 </tr>
 </tbody></table>
-<h4 id='api-overview-extract'>API Overview Extract</h4><h5 id='quick-start'>Quick Start</h5>
+<h3 id='api-overview-extract'>API Overview Extract</h3><h4 id='quick-start'>Quick Start</h4>
 <p>Get started with SMTP2GO&#39;s simple REST API.</p>
 
 <aside class="notice">
@@ -1157,7 +1138,7 @@ Generate an API Key from:
 <p>Your choice of region determines the URL to which you make your API call. For example, to make a request to add senders to your allowed list using the US region, use the path:</p>
 <div class="highlight"><pre class="highlight plaintext"><code>https://us-api.smtp2go.com/v3/allowed_senders/add
 
-</code></pre></div><h4 id='api-schema-extract-2'>API Schema Extract</h4><h5 id='smtp2go-public-api'>SMTP2GO Public API</h5>
+</code></pre></div><h3 id='api-schema-extract-2'>API Schema Extract</h3><h4 id='smtp2go-public-api'>SMTP2GO Public API</h4>
 <p>SMTP2GO Public API Schema v3.0. Integrate with SMTP2GO Systems.</p>
 
 <aside class="notice">
@@ -1165,7 +1146,7 @@ Generate an API Key from:
 Scroll down for code samples, example requests, and responses.
 
 </aside>
-<h6 id='base-urls-2'>Base URLs:</h6>
+<h4 id='base-urls-2'>Base URLs:</h4>
 <ul>
 <li><p><a href="https://api.smtp2go.com/v3">https://api.smtp2go.com/v3</a></p></li>
 <li><p><a href="https://us-api.smtp2go.com/v3">https://us-api.smtp2go.com/v3</a></p></li>
@@ -1174,7 +1155,7 @@ Scroll down for code samples, example requests, and responses.
 
 <p>Email: <a href="mailto:ticket@smtp2go.com">SMTP2GO Support</a> Web: <a href="https://support.smtp2go.com">SMTP2GO Support</a>
 License: <a href="https://support.smtp2go.com/">Apache 2.0</a></p>
-<h6 id='authentication-2'>Authentication</h6>
+<h3 id='authentication-2'>Authentication</h3>
 <ul>
 <li>API Key (APIKeyHeader)
 
@@ -1183,10 +1164,10 @@ License: <a href="https://support.smtp2go.com/">Apache 2.0</a></p>
 </ul></li>
 </ul>
 
-<h2 id="smtp2go-public-api-v3-0-0-activity">Activity</h2>
+<h4 id="smtp2go-public-api-v3-0-0-activity">Activity</h4>
 
 <p>A POST command allows you to search the activity stream. Select individual field/s to search, such as <code>start_date</code>, or utilise the <code>search</code> field to search across all fields.</p>
-<h6 id='postactivitysearch'>postActivitySearch</h6>
+<h4 id='postactivitysearch'>postActivitySearch</h4>
 <p><a id="opIdpostActivitySearch"></a></p>
 
 <blockquote>
@@ -1331,7 +1312,7 @@ curl <span class="nt">-X</span> POST https://api.smtp2go.com/v3/activity/search 
     <span class="c">// ...</span>
 <span class="p">}</span>
 
-</code></pre></div><h4 id='api-key-security'>API key security</h4>
+</code></pre></div><h3 id='api-key-security'>API key security</h3>
 <p>It is important to keep your API key secure. Publicly exposing your key can compromise your account, which could result in unexpected charges. To keep your API keys secure, follow these best practices:</p>
 
 <ul>
@@ -1349,7 +1330,7 @@ Do not embed API keys directly in code. API keys that are embedded in code can b
 <aside class="notice">
 This helps to ensure that your keys do not end up in your source code control system. This is particularly important if you use a public source code management system such as GitHub.
 </aside>
-<h2 id='client-3-faria'>Client 3: Faria</h2><h4 id='about-faria'>About Faria</h4>
+<h2 id='client-3-faria'>Client 3: Faria</h2><h3 id='about-faria'>About Faria</h3>
 <p><a href="https://www.faria.org/">Faria</a> provides its customers with a dashboard SaaS to manage vital aspect of School Administration from applications through to lessons and class management. Faria&#39;s many products are supported by unique API sets.</p>
 
 <p>My task was to:</p>
@@ -1431,10 +1412,6 @@ Also, the API team were not familiar with exposing their API documentation outsi
 </ul>
 
 <p>To protect your key, use <a href="api-key-security">environment variables</a>.</p>
-
-<h1 id="api-v2-year-groups">Year Groups</h1>
-
-<p>This documentation describes all the APIs relating to year groups.</p>
 <h2 id='get-all-year-groups'>Get all Year Groups</h2>
 <p><a id="opIdlistYearGroups"></a></p>
 
@@ -1545,9 +1522,12 @@ Also, the API team were not familiar with exposing their API documentation outsi
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <aside class="notice">
-Unique toFaria's project was particularly challenging due to the access control requirements. Some APIs are going to be available to clients, while others remain private to Faria developers. Faria's CTO wanted a single portal to manage this control pattern.
+Faria's needs were/are unusual in that I was the more experienced member of the team in terms of API documentation. This meant not only did I have to identify the tooling for the developers to use, I also had to advocate for best practice. I supported the various development teams (there are different teams working on each Faria product):
 
-Also, the API team were not familiar with exposing their API documentation outside of their local teams.
+- By writing up how the first individual implemented a new tool and sharing code samples (e.g. Rswag and Spectral)
+  - I had greater visibility over the project with access to all the API codebase repos, something the developers did not have
+- By advocating for CICD practices; now when developers make upstream changes a build is triggered downstream on the documentation site
+- By becoming the in-house "expert" on Redoc.ly (there is a limit to this and I am very clear to everyone involved that I am not a dev!).
 </aside>
 
       </div>
