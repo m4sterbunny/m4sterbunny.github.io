@@ -47,12 +47,12 @@ Note that different styles may be applied to the written English according to cl
 
 As is typical with such a project, I was able to identify inconsistencies in logic such as:
 
-- default value that lay outside of min/max value
+- default values that lay outside of min/max values
 - integer that should be a float
 
 
 <aside class="notice">
-Cloud RF's api creates electromagnetic and geospacial modelling to assist with planning radio transmitter and antena properties).
+Cloud RF's API creates electromagnetic and geospacial modelling to assist with planning radio transmitter and antenna properties).
 </aside>
 
 
@@ -83,8 +83,10 @@ Email: <a href="mailto:support@cloudrf.com">Support</a>
 
 ### Authentication
 
-* API Key (ApiKeyAuth)
-    - Parameter Name: **key**, in: header. An APIKey passed in the request headers.
+An APIKey passed in the request headers:
+
+* ApiKeyAuth
+    - Pass parameter name: **key**, in: header.
 
 #### Endpoint Example
 
@@ -127,17 +129,16 @@ print(r.json())
 ```
 
 #### Cloud RF API
-POST https://api.cloudrf.com/area HTTP/1.1
+POST https://api.cloudrf.com/area
 Host: api.cloudrf.com
 Content-Type: application/json
-Accept: application/json
 
 
 `POST /area`
 
 This endpoint returns an omni-directional coverage plot (point-to-multipoint) as an image, rendered with a color schema. This function assumes the same receiver height at all locations out to fixed radius (up to a 300 km maximum). Due to its recursive processing, this is the slowest of all the API calls. Speed can be improved significantly by adjusting the resolution "res" parameter upwards so 4 (m) is faster than 2 (m). A standard request requires transmitter, receiver, antenna, and output objects; providing model and environment enhances accuracy.
 
-> Body parameter
+> Example Body Parameter
 
 ```json
 {
@@ -417,6 +418,208 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
   "balance": 1
 }
 ```
+<h4 id="tocS_Transmitter">Transmitter</h4>
+
+<a id="schematransmitter"></a>
+<a id="schema_Transmitter"></a>
+<a id="tocStransmitter"></a>
+<a id="tocstransmitter"></a>
+
+```json
+{
+  "lat": 38.916,
+  "lon": 1.448,
+  "alt": 1,
+  "frq": 868,
+  "txw": 0.1,
+  "bwi": 1
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|lat|number(float)|false|none|Latitude of transmitter in decimal degrees.|
+|lon|number(float)|false|none|Longitude of transmitter in decimal degrees.|
+|alt|number(float)|false|none|Altitude above ground level in meters OR feet.|
+|frq|number(float)|false|none|Center frequency in megahertz.|
+|txw|number(float)|false|none|Transmitter power in watts before the antenna.|
+|bwi|number(float)|false|none|Bandwidth in MHz. 1MHz has a noise floor of -114dBm; 10MHz = -104dBm; 20MHz = -101dBm.|
+
+<h4 id="tocS_Antenna">Antenna</h4>
+
+<a id="schemaantenna"></a>
+<a id="schema_Antenna"></a>
+<a id="tocSantenna"></a>
+<a id="tocsantenna"></a>
+
+```json
+{
+  "txg": 2.15,
+  "txl": 1,
+  "ant": 0,
+  "azi": 1,
+  "tlt": 10,
+  "hbw": 2,
+  "vbw": 2,
+  "pol": "h"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|txg|number(float)|false|none|Transmitter antenna gain in dBi.|
+|txl|number(float)|false|none|Feeder loss in dB.|
+|ant|integer(int32)|false|none|Antenna pattern code: 0=allows custom options (see: hbw; vbw; fbr) 1=Vertical dipole (omni-directional).|
+|azi|number(float)|false|none|Antenna azimuth in degrees north.|
+|tlt|number(float)|false|none|Antenna tilt in degrees below the horizon (inverted).|
+|hbw|number(float)|false|none|Custom antenna horizontal beamwidth in degrees; for use only with ant=0.|
+|vbw|number(float)|false|none|Custom antenna vertical beamwidth in degrees; for use only with ant=0.|
+|pol|string|false|none|Antenna polarization.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|ant|0|
+|ant|1|
+|pol|h|
+|pol|v|
+
+<h4 id="tocS_Receiver">Receiver</h4>
+
+<a id="schemareceiver"></a>
+<a id="schema_Receiver"></a>
+<a id="tocSreceiver"></a>
+<a id="tocsreceiver"></a>
+
+```json
+{
+  "lat": 38.906986,
+  "lon": 1.421416,
+  "alt": 0.1,
+  "rxg": 3,
+  "rxs": -100
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|lat|number(float)|false|none|Latitude in decimal degrees.|
+|lon|number(float)|false|none|Longitude in decimal degrees.|
+|alt|number(float)|false|none|Altitude above ground level in meters OR feet.|
+|rxg|number(float)|false|none|Receiver antenna gain in dBi.|
+|rxs|number(float)|false|none|Receiver sensitivity/threshold in measured units defined by 'out' parameter.|
+
+<h4 id="tocS_Model">Model</h4>
+
+<a id="schemamodel"></a>
+<a id="schema_Model"></a>
+<a id="tocSmodel"></a>
+<a id="tocsmodel"></a>
+
+```json
+{
+  "pm": 1,
+  "pe": 2,
+  "cli": 7,
+  "ked": 1,
+  "rel": 55,
+  "ter": 3
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|pm|integer(int32)|false|none|Propagation model: 1=Irregular Terrain Model; 2=Line of Sight (LOS); 3=Hata; 4=ECC33; 5=SUI Microwave; 6=COST231; 7=Free space path loss; 9=Ericsson9999; 10=Plane earth loss; 11=Egli.|
+|pe|integer(int32)|false|none|Propagation model subtype/environment: 1=Conservative/Urban; 2=Average/Suburban; 3=Optimistic/rural.|
+|cli|integer(int32)|false|none|Radio climate for ITM model: (1). 1=Equatorial (Congo); 2=Continental Subtropical (Sudan); 3=Maritime Subtropical (West coast of Africa); 4=Desert (Sahara); 5=Continental Temperate; 6=Maritime Temperate and Over Land (UK and West coasts of US & EU); 7=Maritime Temperate, Over Sea.|
+|ked|number|false|none|Include knife edge diffraction for enhancing basic empirical models (already in ITM). Switch on/off; 1=INCLUDE, 0=OFF, i.e., if diffraction is OFF (0) then the model applies more conservative 'line of sight'.|
+|rel|number(float)|false|none|ITM model required reliability as %|
+|ter|integer(int32)|false|none|Terrain code for ITM model (1): 1=Water; 2=Wet ground; 3=Farmland; 4=Forest/Average; 5=Mountain/Sand; 6=City/Poor ground.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|ked|0|
+|ked|1|
+
+<h4 id="tocS_Environment">Environment</h4>
+
+<a id="schemaenvironment"></a>
+<a id="schema_Environment"></a>
+<a id="tocSenvironment"></a>
+<a id="tocsenvironment"></a>
+
+```json
+{
+  "clm": 1,
+  "cll": 1,
+  "mat": 1
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|clm|integer(int32)|false|none|Clutter mode: 0=None/DSM only; 1=System & custom clutter; 2=Custom clutter only.|
+|cll|integer(int32)|false|none|Clutter loss: 0=None/DSM only; 1=Hard/LOS mode; 2=Soft/NLOS mode.|
+|mat|number(float)|false|none|Clutter attenuation override in dB/m based on a tree block OR hollow building; light foliage=0.1dB/m; brick=1.0dB/m; concrete=5dB/m.|
+
+<h4 id="tocS_Output">Output</h4>
+
+<a id="schemaoutput"></a>
+<a id="schema_Output"></a>
+<a id="tocSoutput"></a>
+<a id="tocsoutput"></a>
+
+```json
+{
+  "units": "metric",
+  "col": "RAINBOW.dBm",
+  "out": 2,
+  "ber": 2,
+  "mod": 7,
+  "nf": -100,
+  "res": 10,
+  "rad": 5
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|units|string|false|none|Define distance units applied; either meters/kilometers (metric) or feet/miles (imperial).|
+|col|string|false|none|Color schema code OR filename string. Codes: 1=Cellular (5); 2=Red; 3=Green; 4=Blue; 5=Microwave(7); 7=Custom RGB; 8=Automatic by frequency; 9=Greyscale/GIS; 10=Rainbow(24); 11=Green/Blue/Red; 13=Sub noise floor (10); 14=TV broadcasting (4); 15=Red threshold; 16=Green threshold; 17=Blue threshold. Filename examples: RAINBOW.dBm; CUSTOMSCHEMA.dBm.|
+|out|integer(int32)|false|none|Measured units: 1=dB; 2=dBm; 3=dBuV; 4=SNR (4 supports nf option).|
+|ber|integer(int32)|false|none|Bit error rate: 1=0.1; 2=0.01; 3=0.001; 4=0.0001; 5=0.00001; 6=0.000001; >6=Lora; 7=SF7; 8=SF8; 9=SF9; 10=SF10; 11=SF11; 12=SF12.|
+|mod|integer(int32)|false|none|Modulation: 1=4QAM; 2=16QAM; 3=64QAM; 4=256QAM; 5=1024QAM; 6=BPSK; 7=QPSK; 8=8PSK; 9=16PSK; 10=32PSK; 11=LoRa.|
+|nf|number(float)|false|none|Noise floor in dBm for use with out=4/SNR.|
+|res|number(float)|false|none|Resolution in meters for output.|
+|rad|number(float)|false|none|Radius in kilometers for output.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|units|metric|
+|units|imperial|
 
 
 # Client 2: SMTP2GO
