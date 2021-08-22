@@ -336,6 +336,24 @@
                   <li>
                     <a href="#create-a-point-to-multipoint-heatmap-parameters" class="toc-h2 toc-link" data-title="Parameters">Parameters</a>
                   </li>
+                  <li>
+                    <a href="#properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                  </li>
+                  <li>
+                    <a href="#properties-2" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                  </li>
+                  <li>
+                    <a href="#properties-3" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                  </li>
+                  <li>
+                    <a href="#properties-4" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                  </li>
+                  <li>
+                    <a href="#properties-5" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                  </li>
+                  <li>
+                    <a href="#properties-6" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -424,12 +442,12 @@ Some clients have API schemas that will become public, others have gated API doc
 <p>As is typical with such a project, I was able to identify inconsistencies in logic such as:</p>
 
 <ul>
-<li>default value that lay outside of min/max value</li>
+<li>default values that lay outside of min/max values</li>
 <li>integer that should be a float</li>
 </ul>
 
 <aside class="notice">
-Cloud RF's api creates electromagnetic and geospacial modelling to assist with planning radio transmitter and antena properties).
+Cloud RF's API creates electromagnetic and geospacial modelling to assist with planning radio transmitter and antenna properties).
 </aside>
 <h3 id='tools-used'>Tools Used</h3>
 <table><thead>
@@ -468,11 +486,13 @@ Cloud RF's api creates electromagnetic and geospacial modelling to assist with p
 
 <p>Email: <a href="mailto:support@cloudrf.com">Support</a></p>
 <h3 id='authentication'>Authentication</h3>
-<ul>
-<li>API Key (ApiKeyAuth)
+<p>An APIKey passed in the request headers:</p>
 
 <ul>
-<li>Parameter Name: <strong>key</strong>, in: header. An APIKey passed in the request headers.</li>
+<li>ApiKeyAuth
+
+<ul>
+<li>Pass parameter name: <strong>key</strong>, in: header.</li>
 </ul></li>
 </ul>
 <h4 id='endpoint-example'>Endpoint Example</h4>
@@ -510,17 +530,16 @@ Cloud RF's api creates electromagnetic and geospacial modelling to assist with p
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div><h4 id='cloud-rf-api'>Cloud RF API</h4>
-<p>POST https://api.cloudrf.com/area HTTP/1.1
+<p>POST https://api.cloudrf.com/area
 Host: api.cloudrf.com
-Content-Type: application/json
-Accept: application/json</p>
+Content-Type: application/json</p>
 
 <p><code>POST /area</code></p>
 
 <p>This endpoint returns an omni-directional coverage plot (point-to-multipoint) as an image, rendered with a color schema. This function assumes the same receiver height at all locations out to fixed radius (up to a 300 km maximum). Due to its recursive processing, this is the slowest of all the API calls. Speed can be improved significantly by adjusting the resolution &quot;res&quot; parameter upwards so 4 (m) is faster than 2 (m). A standard request requires transmitter, receiver, antenna, and output objects; providing model and environment enhances accuracy.</p>
 
 <blockquote>
-<p>Body parameter</p>
+<p>Example Body Parameter</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"site"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A1"</span><span class="p">,</span><span class="w">
@@ -1102,7 +1121,477 @@ Accept: application/json</p>
   </span><span class="nl">"elapsed"</span><span class="p">:</span><span class="w"> </span><span class="mi">3572</span><span class="p">,</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h1 id='client-2-smtp2go'>Client 2: SMTP2GO</h1><h3 id='about-smtp2go'>About SMTP2GO</h3>
+</span></code></pre></div>
+<h4 id="tocS_Transmitter">Transmitter</h4>
+
+<p><a id="schematransmitter"></a>
+<a id="schema_Transmitter"></a>
+<a id="tocStransmitter"></a>
+<a id="tocstransmitter"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">38.916</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.448</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"alt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"frq"</span><span class="p">:</span><span class="w"> </span><span class="mi">868</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"txw"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bwi"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>lat</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Latitude of transmitter in decimal degrees.</td>
+</tr>
+<tr>
+<td>lon</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Longitude of transmitter in decimal degrees.</td>
+</tr>
+<tr>
+<td>alt</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Altitude above ground level in meters OR feet.</td>
+</tr>
+<tr>
+<td>frq</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Center frequency in megahertz.</td>
+</tr>
+<tr>
+<td>txw</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Transmitter power in watts before the antenna.</td>
+</tr>
+<tr>
+<td>bwi</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Bandwidth in MHz. 1MHz has a noise floor of -114dBm; 10MHz = -104dBm; 20MHz = -101dBm.</td>
+</tr>
+</tbody></table>
+
+<h4 id="tocS_Antenna">Antenna</h4>
+
+<p><a id="schemaantenna"></a>
+<a id="schema_Antenna"></a>
+<a id="tocSantenna"></a>
+<a id="tocsantenna"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"txg"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.15</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"txl"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ant"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"azi"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tlt"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"hbw"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"vbw"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-2'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>txg</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Transmitter antenna gain in dBi.</td>
+</tr>
+<tr>
+<td>txl</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Feeder loss in dB.</td>
+</tr>
+<tr>
+<td>ant</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>Antenna pattern code: 0=allows custom options (see: hbw; vbw; fbr) 1=Vertical dipole (omni-directional).</td>
+</tr>
+<tr>
+<td>azi</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Antenna azimuth in degrees north.</td>
+</tr>
+<tr>
+<td>tlt</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Antenna tilt in degrees below the horizon (inverted).</td>
+</tr>
+<tr>
+<td>hbw</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Custom antenna horizontal beamwidth in degrees; for use only with ant=0.</td>
+</tr>
+<tr>
+<td>vbw</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Custom antenna vertical beamwidth in degrees; for use only with ant=0.</td>
+</tr>
+<tr>
+<td>pol</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Antenna polarization.</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-2'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ant</td>
+<td>0</td>
+</tr>
+<tr>
+<td>ant</td>
+<td>1</td>
+</tr>
+<tr>
+<td>pol</td>
+<td>h</td>
+</tr>
+<tr>
+<td>pol</td>
+<td>v</td>
+</tr>
+</tbody></table>
+
+<h4 id="tocS_Receiver">Receiver</h4>
+
+<p><a id="schemareceiver"></a>
+<a id="schema_Receiver"></a>
+<a id="tocSreceiver"></a>
+<a id="tocsreceiver"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">38.906986</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lon"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.421416</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"alt"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rxg"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rxs"</span><span class="p">:</span><span class="w"> </span><span class="mi">-100</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-3'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>lat</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Latitude in decimal degrees.</td>
+</tr>
+<tr>
+<td>lon</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Longitude in decimal degrees.</td>
+</tr>
+<tr>
+<td>alt</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Altitude above ground level in meters OR feet.</td>
+</tr>
+<tr>
+<td>rxg</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Receiver antenna gain in dBi.</td>
+</tr>
+<tr>
+<td>rxs</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Receiver sensitivity/threshold in measured units defined by &#39;out&#39; parameter.</td>
+</tr>
+</tbody></table>
+
+<h4 id="tocS_Model">Model</h4>
+
+<p><a id="schemamodel"></a>
+<a id="schema_Model"></a>
+<a id="tocSmodel"></a>
+<a id="tocsmodel"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"pm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pe"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cli"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ked"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rel"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ter"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-4'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pm</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>Propagation model: 1=Irregular Terrain Model; 2=Line of Sight (LOS); 3=Hata; 4=ECC33; 5=SUI Microwave; 6=COST231; 7=Free space path loss; 9=Ericsson9999; 10=Plane earth loss; 11=Egli.</td>
+</tr>
+<tr>
+<td>pe</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>Propagation model subtype/environment: 1=Conservative/Urban; 2=Average/Suburban; 3=Optimistic/rural.</td>
+</tr>
+<tr>
+<td>cli</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>Radio climate for ITM model: (1). 1=Equatorial (Congo); 2=Continental Subtropical (Sudan); 3=Maritime Subtropical (West coast of Africa); 4=Desert (Sahara); 5=Continental Temperate; 6=Maritime Temperate and Over Land (UK and West coasts of US &amp; EU); 7=Maritime Temperate, Over Sea.</td>
+</tr>
+<tr>
+<td>ked</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>Include knife edge diffraction for enhancing basic empirical models (already in ITM). Switch on/off; 1=INCLUDE, 0=OFF, i.e., if diffraction is OFF (0) then the model applies more conservative &#39;line of sight&#39;.</td>
+</tr>
+<tr>
+<td>rel</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>ITM model required reliability as %</td>
+</tr>
+<tr>
+<td>ter</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>Terrain code for ITM model (1): 1=Water; 2=Wet ground; 3=Farmland; 4=Forest/Average; 5=Mountain/Sand; 6=City/Poor ground.</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ked</td>
+<td>0</td>
+</tr>
+<tr>
+<td>ked</td>
+<td>1</td>
+</tr>
+</tbody></table>
+
+<h4 id="tocS_Environment">Environment</h4>
+
+<p><a id="schemaenvironment"></a>
+<a id="schema_Environment"></a>
+<a id="tocSenvironment"></a>
+<a id="tocsenvironment"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"clm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cll"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"mat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-5'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>clm</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>Clutter mode: 0=None/DSM only; 1=System &amp; custom clutter; 2=Custom clutter only.</td>
+</tr>
+<tr>
+<td>cll</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>Clutter loss: 0=None/DSM only; 1=Hard/LOS mode; 2=Soft/NLOS mode.</td>
+</tr>
+<tr>
+<td>mat</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Clutter attenuation override in dB/m based on a tree block OR hollow building; light foliage=0.1dB/m; brick=1.0dB/m; concrete=5dB/m.</td>
+</tr>
+</tbody></table>
+
+<h4 id="tocS_Output">Output</h4>
+
+<p><a id="schemaoutput"></a>
+<a id="schema_Output"></a>
+<a id="tocSoutput"></a>
+<a id="tocsoutput"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"units"</span><span class="p">:</span><span class="w"> </span><span class="s2">"metric"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"col"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RAINBOW.dBm"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"out"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ber"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"nf"</span><span class="p">:</span><span class="w"> </span><span class="mi">-100</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rad"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-6'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>units</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Define distance units applied; either meters/kilometers (metric) or feet/miles (imperial).</td>
+</tr>
+<tr>
+<td>col</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Color schema code OR filename string. Codes: 1=Cellular (5); 2=Red; 3=Green; 4=Blue; 5=Microwave(7); 7=Custom RGB; 8=Automatic by frequency; 9=Greyscale/GIS; 10=Rainbow(24); 11=Green/Blue/Red; 13=Sub noise floor (10); 14=TV broadcasting (4); 15=Red threshold; 16=Green threshold; 17=Blue threshold. Filename examples: RAINBOW.dBm; CUSTOMSCHEMA.dBm.</td>
+</tr>
+<tr>
+<td>out</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>Measured units: 1=dB; 2=dBm; 3=dBuV; 4=SNR (4 supports nf option).</td>
+</tr>
+<tr>
+<td>ber</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>Bit error rate: 1=0.1; 2=0.01; 3=0.001; 4=0.0001; 5=0.00001; 6=0.000001; &gt;6=Lora; 7=SF7; 8=SF8; 9=SF9; 10=SF10; 11=SF11; 12=SF12.</td>
+</tr>
+<tr>
+<td>mod</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>Modulation: 1=4QAM; 2=16QAM; 3=64QAM; 4=256QAM; 5=1024QAM; 6=BPSK; 7=QPSK; 8=8PSK; 9=16PSK; 10=32PSK; 11=LoRa.</td>
+</tr>
+<tr>
+<td>nf</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Noise floor in dBm for use with out=4/SNR.</td>
+</tr>
+<tr>
+<td>res</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Resolution in meters for output.</td>
+</tr>
+<tr>
+<td>rad</td>
+<td>number(float)</td>
+<td>false</td>
+<td>none</td>
+<td>Radius in kilometers for output.</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-4'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>units</td>
+<td>metric</td>
+</tr>
+<tr>
+<td>units</td>
+<td>imperial</td>
+</tr>
+</tbody></table>
+<h1 id='client-2-smtp2go'>Client 2: SMTP2GO</h1><h3 id='about-smtp2go'>About SMTP2GO</h3>
 <p>SMTP2GO provides their customers with a dashboard to manage their email campaigns. They also allow users to interact directly with the API that underpins it.</p>
 
 <p>My task was to take a non-spec-compliant API schema (in YAML format) and:</p>
