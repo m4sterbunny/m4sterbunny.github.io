@@ -289,6 +289,7 @@
     <script>
       $(function() { setupCodeCopy(); });
     </script>
+    <link href="images/favicon-423b3140.ico" rel="icon" type="image/ico" />
   </head>
 
   <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
@@ -299,7 +300,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-efb22da2.png" class="logo" alt="" />
+      <img src="images/logo-885bc8b0.png" class="logo" alt="" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
@@ -350,6 +351,15 @@
                     <a href="#api-overview-extract" class="toc-h2 toc-link" data-title="API Overview Extract">API Overview Extract</a>
                   </li>
                   <li>
+                    <a href="#quick-start" class="toc-h2 toc-link" data-title="Quick Start">Quick Start</a>
+                  </li>
+                  <li>
+                    <a href="#prerequisites" class="toc-h2 toc-link" data-title="Prerequisites">Prerequisites</a>
+                  </li>
+                  <li>
+                    <a href="#authenticate" class="toc-h2 toc-link" data-title="Authenticate">Authenticate</a>
+                  </li>
+                  <li>
                     <a href="#api-schema-extract-2" class="toc-h2 toc-link" data-title="API Schema Extract">API Schema Extract</a>
                   </li>
                   <li>
@@ -370,10 +380,10 @@
                     <a href="#tools-used-3" class="toc-h2 toc-link" data-title="Tools Used">Tools Used</a>
                   </li>
                   <li>
-                    <a href="#authentication-3" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                    <a href="#get-all-year-groups" class="toc-h2 toc-link" data-title="Get all Year Groups">Get all Year Groups</a>
                   </li>
                   <li>
-                    <a href="#get-all-year-groups" class="toc-h2 toc-link" data-title="Get all Year Groups">Get all Year Groups</a>
+                    <a href="#get-all-year-groups-parameters" class="toc-h2 toc-link" data-title="Parameters">Parameters</a>
                   </li>
               </ul>
           </li>
@@ -1135,22 +1145,18 @@ Accept: application/json</p>
 <td>For task management</td>
 </tr>
 </tbody></table>
-<h3 id='api-overview-extract'>API Overview Extract</h3><h4 id='quick-start'>Quick Start</h4>
+<h3 id='api-overview-extract'>API Overview Extract</h3><h3 id='quick-start'>Quick Start</h3>
 <p>Get started with SMTP2GO&#39;s simple REST API.</p>
 
-<aside class="notice">
-
-These docs support users who wish to integrate with the API. Should you wish to use SMTP, [that is also supported](https://www.smtp2go.com/setup/).
-
-</aside>
-<h4 id='prerequisites'>Prerequisites</h4>
+<p>These docs support users who wish to integrate with the API. Should you wish to use SMTP, <a href="https://www.smtp2go.com/setup/">that is also supported</a>.</p>
+<h3 id='prerequisites'>Prerequisites</h3>
 <p>To make an API call to SMTP2GO, first:</p>
 
 <ul>
 <li><a href="https://www.smtp2go.com/pricing/">create an account</a></li>
 <li><a href="#authenticate">generate a unique API Key</a></li>
 </ul>
-<h5 id='authenticate'>Authenticate</h5>
+<h3 id='authenticate'>Authenticate</h3>
 <p>Once you have registered for an account, log in to your <a href="https://app.smtp2go.com/login/">control panel</a>.</p>
 
 <aside class="notice">
@@ -1424,24 +1430,14 @@ Also, the API team were not familiar with exposing their API documentation outsi
 <h4 id='api-schema-extract-3'>API Schema Extract</h4>
 <p>This API set Orchestrates Faria Services Manager and School Administration with the ManageBac GUI.</p>
 
-<p>Base URLs:</p>
+<p>Base URL:</p>
 
 <ul>
-<li><p><a href="https://api.devel.managebac.com">https://api.devel.managebac.com</a></p></li>
-<li><p><a href="https://api.{server}">https://api.{server}</a></p>
-
-<ul>
-<li><p><strong>server</strong> -  Default: devel.managebac.com</p>
-
-<ul>
-<li>devel.managebac.com</li>
-<li>managebac.dev</li>
-</ul></li>
-</ul></li>
+<li><a href="https://api.devel.managebac.com">https://api.devel.managebac.com</a></li>
 </ul>
 
 <p>Email: <a href="mailto:hello@managebac.com">Faria International School</a> Web: <a href="https://www.faria.org/support">Faria International School</a></p>
-<h3 id='authentication-3'>Authentication</h3>
+<h4 id='authentication-3'>Authentication</h4>
 <ul>
 <li><p>API Key (authTokenQuery)</p>
 
@@ -1456,7 +1452,7 @@ Also, the API team were not familiar with exposing their API documentation outsi
 </ul>
 
 <p>To protect your key, use <a href="api-key-security">environment variables</a>.</p>
-<h2 id='get-all-year-groups'>Get all Year Groups</h2>
+<h3 id='get-all-year-groups'>Get all Year Groups</h3>
 <p><a id="opIdlistYearGroups"></a></p>
 
 <blockquote>
@@ -1565,14 +1561,13 @@ Also, the API team were not familiar with exposing their API documentation outsi
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<aside class="notice">
-Faria's needs were/are unusual in that I was the more experienced member of the team in terms of API documentation. This meant not only did I have to identify the tooling for the developers to use, I also had to advocate for best practice. I supported the various development teams (there are different teams working on each Faria product):
+<p>Faria&#39;s needs were/are unusual in that I was the more experienced member of the team in terms of API documentation. This meant not only did I have to identify the tooling for the developers to use, I also had to advocate for best practice. I supported the various development teams (there are different teams working on each Faria product):</p>
 
-- By writing up how the first individual implemented a new tool and sharing code samples (e.g. Rswag and Spectral)
-  - I had greater visibility over the project with access to all the API codebase repos, something the developers did not have
-- By advocating for CICD practices; now when developers make upstream changes a build is triggered downstream on the documentation site
-- By becoming the in-house "expert" on Redoc.ly (there is a limit to this and I am very clear to everyone involved that I am not a dev!).
-</aside>
+<ul>
+<li>By writing up how the first individual implemented a new tool and sharing code samples (e.g. Rswag and Spectral)</li>
+<li>By advocating for CICD practices; now when developers make upstream changes a build is triggered downstream on the documentation site</li>
+<li>By becoming the in-house &quot;expert&quot; on Redoc.ly (there is a limit to this and I am very clear to everyone involved that I am not a dev!).</li>
+</ul>
 
       </div>
       <div class="dark-box">
