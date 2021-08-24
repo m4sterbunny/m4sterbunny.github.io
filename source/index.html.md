@@ -646,7 +646,7 @@ Generate an API Key from:
 
 Your API key must be provided in the `X-Smtp2go-Api-Key` header **and** in the body `api_key`.
 
-If you are new to using API keys, please consider [API key security](#API-key-security).
+If you are new to using API keys, please consider [API key security](#api-key-security).
 
 #### Choose your Region
 
@@ -987,7 +987,7 @@ Email: <a href="mailto:hello@managebac.com">Faria International School</a> Web: 
 * API Key (authTokenHeader)
     - Parameter Name: **auth-token**, in: header. Your V2 API authentication token may be passed in the header.
 
-To protect your key, use [environment variables](api-key-security).
+To protect your key, use [environment variables](#api-key-security).
 
 
 #### Get all Year Groups
