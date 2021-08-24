@@ -232,18 +232,6 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 |»» res|body|number(float)|false|Resolution in meters for output.|
 |»» rad|body|number(float)|false|Radius in kilometers for output.|
 
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|»» ant|0|
-|»» ant|1|
-|»» pol|h|
-|»» pol|v|
-|»» ked|0|
-|»» ked|1|
-|»» units|metric|
-|»» units|imperial|
 
 > Example responses
 
@@ -437,7 +425,7 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 
 ```
 
-### Properties
+#### Transmitter Object
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
@@ -469,7 +457,7 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 
 ```
 
-### Properties
+#### Antenna Object
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
@@ -482,14 +470,6 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 |vbw|number(float)|false|none|Custom antenna vertical beamwidth in degrees; for use only with ant=0.|
 |pol|string|false|none|Antenna polarization.|
 
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|ant|0|
-|ant|1|
-|pol|h|
-|pol|v|
 
 <h4 id="tocS_Receiver">Receiver</h4>
 
@@ -509,7 +489,7 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 
 ```
 
-### Properties
+#### Receiver Object
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
@@ -538,7 +518,7 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 
 ```
 
-### Properties
+#### Model Object
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
@@ -549,12 +529,6 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 |rel|number(float)|false|none|ITM model required reliability as %|
 |ter|integer(int32)|false|none|Terrain code for ITM model (1): 1=Water; 2=Wet ground; 3=Farmland; 4=Forest/Average; 5=Mountain/Sand; 6=City/Poor ground.|
 
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|ked|0|
-|ked|1|
 
 <h4 id="tocS_Environment">Environment</h4>
 
@@ -572,7 +546,7 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 
 ```
 
-### Properties
+#### Environment Object
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
@@ -601,7 +575,7 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 
 ```
 
-### Properties
+#### Output Object
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
@@ -613,13 +587,6 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 |nf|number(float)|false|none|Noise floor in dBm for use with out=4/SNR.|
 |res|number(float)|false|none|Resolution in meters for output.|
 |rad|number(float)|false|none|Radius in kilometers for output.|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|units|metric|
-|units|imperial|
 
 
 # Client 2: SMTP2GO
@@ -644,9 +611,9 @@ As is typical with such a project, I was able to identify inconsistencies in log
 
 Parameter | Description
 --------- | -----------
-Slate | Cleaned up the YAML, converted it to JSON, used Widdershins to convert the shema to Markdown and added Markdown pages for high-level overview material in Slate
+Slate | Cleaned up the YAML, converted it to JSON, used Widdershins to convert the schema to Markdown and added Markdown pages for high-level overview material in Slate
 Stoplight | I used Stoplight locally to assist with error identification and ensuring compliance with spec
-Slack | The main communications channel to chat to the dev assigned to answer all my questions
+Slack | The main communications channel to chat to the developer assigned to answer all my questions
 GitBash | For version control via GitHub
 Asana | For task management
 
@@ -929,7 +896,7 @@ My task was to:
 
 - identify a platform that could support multi-level user access including an SSO
 - assist with implementing the platform
-- advocate for a "docs as code" philosphy
+- advocate for a "docs as code" philosophy
 - create high-level user documentation based on often out-of-date, and conflicting PDF guides
 - improve the endpoint and schema descriptions for 5 APIs that support various dashboards
 - ensure the API schemas comply with Open API 3.0
