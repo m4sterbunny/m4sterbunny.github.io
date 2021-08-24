@@ -870,6 +870,55 @@ func main() {
 
 ```
 
+
+`POST /activity/search`
+
+*Search events*
+
+This endpoint searches the activity stream for events.
+
+> Body parameter
+
+```json
+{
+  "api_key": "api-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "start_date": "2021-04-20T00:00:00",
+  "end_date": "2021-04-21T00:00:00",
+  "search": "string",
+  "search_subject": "string",
+  "search_sender": "string",
+  "search_recipient": "string",
+  "search_usernames": "string",
+  "limit": 0,
+  "continue_token": "string",
+  "only_latest": false,
+  "event_types": [
+    "processed"
+  ]
+}
+```
+
+<h3 id="postactivitysearch-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|object|false|The request payload carrying the search criteria|
+|» api_key|body|[APIKeyField](#schemaapikeyfield)|true|API Key from [SMTP2GO App](https://app.smtp2go.com/login/) > Settings > API Keys|
+|» start_date|body|string|false|ISO-8601-formatted datetime, which defaults to the current date at midnight (the range is inclusive of start_date and exclusive of end_date).|
+|» end_date|body|string|false|ISO-8601-formatted datetime, which defaults to now|
+|» search|body|string|false|A string used to search across all fields|
+|» search_subject|body|string|false|A string used to search the subject field|
+|» search_sender|body|string|false|A string used to search the sender field|
+|» search_recipient|body|string|false|A string used to search the recipients field|
+|» search_usernames|body|string|false|A string used to search the username field|
+|» limit|body|integer|false|An integer to restrict the number of events returned per page|
+|» continue_token|body|string|false|A string containing a token used to fetch the next page of results based on the current search|
+|» only_latest|body|boolean|false|Pass true here to display only the latest event for each email|
+|» event_types|body|any|false|none|
+|»» *anonymous*|body|[string]|false|none|
+|»» *anonymous*|body|any|false|A list of event types to filter on|
+
+
 ### API key security
 
 It is important to keep your API key secure. Publicly exposing your key can compromise your account, which could result in unexpected charges. To keep your API keys secure, follow these best practices:
