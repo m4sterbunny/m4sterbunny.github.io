@@ -354,12 +354,6 @@
                     <a href="#quick-start" class="toc-h2 toc-link" data-title="Quick Start">Quick Start</a>
                   </li>
                   <li>
-                    <a href="#prerequisites" class="toc-h2 toc-link" data-title="Prerequisites">Prerequisites</a>
-                  </li>
-                  <li>
-                    <a href="#authenticate" class="toc-h2 toc-link" data-title="Authenticate">Authenticate</a>
-                  </li>
-                  <li>
                     <a href="#api-schema-extract-2" class="toc-h2 toc-link" data-title="API Schema Extract">API Schema Extract</a>
                   </li>
                   <li>
@@ -383,10 +377,10 @@
                     <a href="#tools-used-3" class="toc-h2 toc-link" data-title="Tools Used">Tools Used</a>
                   </li>
                   <li>
-                    <a href="#get-all-year-groups" class="toc-h2 toc-link" data-title="Get all Year Groups">Get all Year Groups</a>
+                    <a href="#api-schema-extract-3" class="toc-h2 toc-link" data-title="API Schema Extract">API Schema Extract</a>
                   </li>
                   <li>
-                    <a href="#get-all-year-groups-parameters" class="toc-h2 toc-link" data-title="Parameters">Parameters</a>
+                    <a href="#get-all-year-groups-parameters" class="toc-h2 toc-link" data-title=" Year Group Parameters"> Year Group Parameters</a>
                   </li>
               </ul>
           </li>
@@ -1527,14 +1521,14 @@ Content-Type: application/json</p>
 <p>Get started with SMTP2GO&#39;s simple REST API.</p>
 
 <p>These docs support users who wish to integrate with the API. Should you wish to use SMTP, <a href="https://www.smtp2go.com/setup/">that is also supported</a>.</p>
-<h3 id='prerequisites'>Prerequisites</h3>
+<h4 id='prerequisites'>Prerequisites</h4>
 <p>To make an API call to SMTP2GO, first:</p>
 
 <ul>
 <li><a href="https://www.smtp2go.com/pricing/">create an account</a></li>
 <li><a href="#authenticate">generate a unique API Key</a></li>
 </ul>
-<h3 id='authenticate'>Authenticate</h3>
+<h4 id='authenticate'>Authenticate</h4>
 <p>Once you have registered for an account, log in to your <a href="https://app.smtp2go.com/login/">control panel</a>.</p>
 
 <aside class="notice">
@@ -1949,7 +1943,7 @@ Also, the API team were not familiar with exposing their API documentation outsi
 <td>For version control via GitHub</td>
 </tr>
 </tbody></table>
-<h4 id='api-schema-extract-3'>API Schema Extract</h4>
+<h3 id='api-schema-extract-3'>API Schema Extract</h3>
 <p>This API set Orchestrates Faria Services Manager and School Administration with the ManageBac GUI.</p>
 
 <p>Base URL:</p>
@@ -1974,7 +1968,7 @@ Also, the API team were not familiar with exposing their API documentation outsi
 </ul>
 
 <p>To protect your key, use <a href="api-key-security">environment variables</a>.</p>
-<h3 id='get-all-year-groups'>Get all Year Groups</h3>
+<h4 id='get-all-year-groups'>Get all Year Groups</h4>
 <p><a id="opIdlistYearGroups"></a></p>
 
 <blockquote>
@@ -2011,7 +2005,7 @@ Also, the API team were not familiar with exposing their API documentation outsi
 
 <p>This endpoint retrieves the basic information of all Year Groups. It returns the group name, program, grade level and student IDs for members.<b> Note:</b> <code>/v2/ib-groups</code> endpoints have been deprecated in favor of <code>/v2/year-groups</code> endpoints and will be removed completely by the end of 2021.</p>
 
-<h3 id="get-all-year-groups-parameters">Parameters</h3>
+<h3 id="get-all-year-groups-parameters"> Year Group Parameters</h3>
 
 <table><thead>
 <tr>
@@ -2083,12 +2077,12 @@ Also, the API team were not familiar with exposing their API documentation outsi
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Faria&#39;s needs were/are unusual in that I was the more experienced member of the team in terms of API documentation. This meant not only did I have to identify the tooling for the developers to use, I also had to advocate for best practice. I supported the various development teams (there are different teams working on each Faria product):</p>
+<p>Faria&#39;s needs were/are unusual in that I was the more experienced member of the team in terms of API documentation. This meant not only did I have to identify the tooling for the developers to use, I also had to advocate for best practice. I supported the various development teams (there are different teams working on each Faria product/API):</p>
 
 <ul>
-<li>By writing up how the first individual implemented a new tool and sharing code samples (e.g. Rswag and Spectral)</li>
-<li>By advocating for CICD practices; now when developers make upstream changes a build is triggered downstream on the documentation site</li>
-<li>By becoming the in-house &quot;expert&quot; on Redoc.ly (there is a limit to this and I am very clear to everyone involved that I am not a dev!).</li>
+<li>By writing up how the first individual implemented a new tool and sharing code samples (e.g. for Rswag and Spectral)</li>
+<li>By advocating for CICD practices; now when developers make upstream changes to the API a build is triggered downstream to update the API schema on the documentation site</li>
+<li>By becoming the in-house &quot;expert&quot; on Redoc.ly (there is a limit to this, I am not a developer! I can, however, use the &quot;switches&quot; to activate and deactivate features and functionality for the build).</li>
 </ul>
 
       </div>
