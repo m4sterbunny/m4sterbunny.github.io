@@ -336,24 +336,6 @@
                   <li>
                     <a href="#create-a-point-to-multipoint-heatmap-parameters" class="toc-h2 toc-link" data-title="Parameters">Parameters</a>
                   </li>
-                  <li>
-                    <a href="#properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
-                  </li>
-                  <li>
-                    <a href="#properties-2" class="toc-h2 toc-link" data-title="Properties">Properties</a>
-                  </li>
-                  <li>
-                    <a href="#properties-3" class="toc-h2 toc-link" data-title="Properties">Properties</a>
-                  </li>
-                  <li>
-                    <a href="#properties-4" class="toc-h2 toc-link" data-title="Properties">Properties</a>
-                  </li>
-                  <li>
-                    <a href="#properties-5" class="toc-h2 toc-link" data-title="Properties">Properties</a>
-                  </li>
-                  <li>
-                    <a href="#properties-6" class="toc-h2 toc-link" data-title="Properties">Properties</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -908,46 +890,6 @@ Content-Type: application/json</p>
 <td>Radius in kilometers for output.</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>»» ant</td>
-<td>0</td>
-</tr>
-<tr>
-<td>»» ant</td>
-<td>1</td>
-</tr>
-<tr>
-<td>»» pol</td>
-<td>h</td>
-</tr>
-<tr>
-<td>»» pol</td>
-<td>v</td>
-</tr>
-<tr>
-<td>»» ked</td>
-<td>0</td>
-</tr>
-<tr>
-<td>»» ked</td>
-<td>1</td>
-</tr>
-<tr>
-<td>»» units</td>
-<td>metric</td>
-</tr>
-<tr>
-<td>»» units</td>
-<td>imperial</td>
-</tr>
-</tbody></table>
 
 <blockquote>
 <p>Example responses</p>
@@ -1137,7 +1079,7 @@ Content-Type: application/json</p>
   </span><span class="nl">"bwi"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h3 id='properties'>Properties</h3>
+</span></code></pre></div><h4 id='transmitter-object'>Transmitter Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1208,7 +1150,7 @@ Content-Type: application/json</p>
   </span><span class="nl">"pol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h3 id='properties-2'>Properties</h3>
+</span></code></pre></div><h4 id='antenna-object'>Antenna Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1275,30 +1217,6 @@ Content-Type: application/json</p>
 <td>Antenna polarization.</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-2'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ant</td>
-<td>0</td>
-</tr>
-<tr>
-<td>ant</td>
-<td>1</td>
-</tr>
-<tr>
-<td>pol</td>
-<td>h</td>
-</tr>
-<tr>
-<td>pol</td>
-<td>v</td>
-</tr>
-</tbody></table>
 
 <h4 id="tocS_Receiver">Receiver</h4>
 
@@ -1314,7 +1232,7 @@ Content-Type: application/json</p>
   </span><span class="nl">"rxs"</span><span class="p">:</span><span class="w"> </span><span class="mi">-100</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h3 id='properties-3'>Properties</h3>
+</span></code></pre></div><h4 id='receiver-object'>Receiver Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1376,7 +1294,7 @@ Content-Type: application/json</p>
   </span><span class="nl">"ter"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h3 id='properties-4'>Properties</h3>
+</span></code></pre></div><h4 id='model-object'>Model Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1429,22 +1347,6 @@ Content-Type: application/json</p>
 <td>Terrain code for ITM model (1): 1=Water; 2=Wet ground; 3=Farmland; 4=Forest/Average; 5=Mountain/Sand; 6=City/Poor ground.</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-3'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ked</td>
-<td>0</td>
-</tr>
-<tr>
-<td>ked</td>
-<td>1</td>
-</tr>
-</tbody></table>
 
 <h4 id="tocS_Environment">Environment</h4>
 
@@ -1458,7 +1360,7 @@ Content-Type: application/json</p>
   </span><span class="nl">"mat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h3 id='properties-5'>Properties</h3>
+</span></code></pre></div><h4 id='environment-object'>Environment Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1508,7 +1410,7 @@ Content-Type: application/json</p>
   </span><span class="nl">"rad"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h3 id='properties-6'>Properties</h3>
+</span></code></pre></div><h4 id='output-object'>Output Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1575,22 +1477,6 @@ Content-Type: application/json</p>
 <td>Radius in kilometers for output.</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-4'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>units</td>
-<td>metric</td>
-</tr>
-<tr>
-<td>units</td>
-<td>imperial</td>
-</tr>
-</tbody></table>
 <h1 id='client-2-smtp2go'>Client 2: SMTP2GO</h1><h3 id='about-smtp2go'>About SMTP2GO</h3>
 <p>SMTP2GO provides their customers with a dashboard to manage their email campaigns. They also allow users to interact directly with the API that underpins it.</p>
 
@@ -1615,7 +1501,7 @@ Content-Type: application/json</p>
 </thead><tbody>
 <tr>
 <td>Slate</td>
-<td>Cleaned up the YAML, converted it to JSON, used Widdershins to convert the shema to Markdown and added Markdown pages for high-level overview material in Slate</td>
+<td>Cleaned up the YAML, converted it to JSON, used Widdershins to convert the schema to Markdown and added Markdown pages for high-level overview material in Slate</td>
 </tr>
 <tr>
 <td>Stoplight</td>
@@ -1623,7 +1509,7 @@ Content-Type: application/json</p>
 </tr>
 <tr>
 <td>Slack</td>
-<td>The main communications channel to chat to the dev assigned to answer all my questions</td>
+<td>The main communications channel to chat to the developer assigned to answer all my questions</td>
 </tr>
 <tr>
 <td>GitBash</td>
@@ -1877,7 +1763,7 @@ This helps to ensure that your keys do not end up in your source code control sy
 <ul>
 <li>identify a platform that could support multi-level user access including an SSO</li>
 <li>assist with implementing the platform</li>
-<li>advocate for a &quot;docs as code&quot; philosphy</li>
+<li>advocate for a &quot;docs as code&quot; philosophy</li>
 <li>create high-level user documentation based on often out-of-date, and conflicting PDF guides</li>
 <li>improve the endpoint and schema descriptions for 5 APIs that support various dashboards</li>
 <li>ensure the API schemas comply with Open API 3.0</li>
