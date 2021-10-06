@@ -52,7 +52,7 @@ As is typical with such a project, I was able to identify inconsistencies in log
 
 
 <aside class="notice">
-Cloud RF's API creates electromagnetic and geospacial modelling to assist with planning radio transmitter and antenna properties).
+Cloud RF's API creates electromagnetic and geospacial modelling to assist with planning radio transmitter and antenna properties.
 </aside>
 
 
