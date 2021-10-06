@@ -903,7 +903,7 @@ This endpoint searches the activity stream for events.
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|object|false|The request payload carrying the search criteria|
-|» api_key|body|[APIKeyField](#schemaapikeyfield)|true|API Key from [SMTP2GO App](https://app.smtp2go.com/login/) > Settings > API Keys|
+|» api_key|body|APIKeyField|true|API Key from [SMTP2GO App](https://app.smtp2go.com/login/) > Settings > API Keys|
 |» start_date|body|string|false|ISO-8601-formatted datetime, which defaults to the current date at midnight (the range is inclusive of start_date and exclusive of end_date).|
 |» end_date|body|string|false|ISO-8601-formatted datetime, which defaults to now|
 |» search|body|string|false|A string used to search across all fields|
@@ -939,7 +939,7 @@ This helps to ensure that your keys do not end up in your source code control sy
 
 ### About Faria
 
-[Faria](https://www.faria.org/) provides its customers with a dashboard SaaS to manage vital aspect of School Administration from applications through to lessons and class management. Faria's many products are supported by unique API sets.
+[Faria](https://www.faria.org/) provides its customers with a dashboard SaaS to manage vital aspects of School Administration from applications through to lessons and class management. Faria's many products are supported by unique API sets.
 
 My task was to:
 
