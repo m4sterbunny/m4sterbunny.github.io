@@ -2,6 +2,10 @@
 
 https://m4sterbunny.github.io/build/#api-showcase
 
+## Purpose
+
+Showcase past projects without revealing too much of past client's secret sauce.
+
 
 ### Slate with Docker container
 
