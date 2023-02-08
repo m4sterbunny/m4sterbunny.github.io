@@ -23,7 +23,7 @@ code_clipboard: true
 Welcome to my API documentation demo site.
 
 <aside class="notice">
-Some clients have API schemas that will become public, others have gated API documentation. Even clients that intend their API schema to be made public may not want to do so until the full review cycle is complete. This showcase represents my solution to both challenges.
+Some clients have API schemas that will become public, others have gated API documentation. Even clients that intend their API schema to be made public may not want to do so until the full review cycle is complete. This showcase represents my solution to such challenges.
 </aside>
 
 Note that different styles may be applied to the written English according to client preferences. Expect:
@@ -34,7 +34,7 @@ Note that different styles may be applied to the written English according to cl
 - Oxford comma/none
 
 
-# Client 1: Cloud RF
+# Showcase 1: Cloud RF
 
 ####  About Cloud RF
 
@@ -60,7 +60,7 @@ Cloud RF's API creates electromagnetic and geospacial modelling to assist with p
 
 Parameter | Description
 --------- | -----------
-Pandoc | I have updated the YAML file and written pages in Markdown for a Pandoc-generated static site
+Pandoc | I updated the YAML file and written pages in Markdown for a Pandoc-generated static site
 Stoplight | I used Stoplight locally to assist with error identification and ensuring compliance with spec
 GitHub | The main communications channel via PRs
 GitBash | For version control via GitHub
@@ -589,7 +589,7 @@ This endpoint returns an omni-directional coverage plot (point-to-multipoint) as
 |rad|number(float)|false|none|Radius in kilometers for output.|
 
 
-# Client 2: SMTP2GO
+# Showcase 2: SMTP2GO
 
 ### About SMTP2GO
 
@@ -935,7 +935,7 @@ Do not embed API keys directly in code. API keys that are embedded in code can b
 This helps to ensure that your keys do not end up in your source code control system. This is particularly important if you use a public source code management system such as GitHub.
 </aside>
 
-# Client 3: Faria
+# Showcase 3: Faria
 
 ### About Faria
 
@@ -1082,10 +1082,430 @@ This endpoint retrieves the basic information of all Year Groups. It returns the
 }
 ```
 
-Faria's needs were/are unusual in that I was the more experienced member of the team in terms of API documentation. This meant not only did I have to identify the tooling for the developers to use, I also had to advocate for best practice. I supported the various development teams (there are different teams working on each Faria product/API):
+Within the Faria team, I was the most experienced in terms of API documentation. This meant not only did I have to identify the tooling for the developers to use, I also had to advocate for best practice. I supported the various development teams (there are different teams working on each Faria product/API):
 
-- By writing up how the first individual implemented a new tool and sharing code samples (e.g. for Rswag and Spectral)
-- By advocating for CICD practices; now when developers make upstream changes to the API a build is triggered downstream to update the API schema on the documentation site
-- By becoming the in-house "expert" on Redoc.ly (there is a limit to this, I am not a developer! I can, however, use the "switches" to activate and deactivate features and functionality for the build).
+  - By writing up how the first individual implemented a new tool and sharing code samples (e.g. for Rswag and Spectral)
+  - By advocating for CICD practices; now when developers make upstream changes to the API a build is triggered downstream to update the API schema on the documentation site
+  - By becoming the in-house "expert" on Redoc.ly (there is a limit to this, I am not a developer! I can, however, customize the build).
+
+# Showcase 4: Qredo
+
+### About Qredo
+
+Qredo is a startup in the Crypto wallet space. As documentation lead I was responsible for the [developer portal](https://developers.qredo.com/): its information heirachy and content.
+
+In terms of the API specifications, my task was to take non-spec-compliant API schemas (in YAML format) and:
+
+- improve the endpoint and schema descriptions
+- ensure the API schema complies with Open API 3.0
+- provide high-level docs
+
+As is typical with such a project, I was able to identify inconsistencies in logic such as:
+
+- JSON payloads that did not correlate with the service
+- boolean with no example to let user know whether to pass 0/1 or True/False
+- flat schema structures that could be improved using oneOf
+- lack of DRY principles in schema reuse
 
 
+### Tools Used
+
+Parameter | Description
+--------- | -----------
+Mkdocs | Cleaned up the YAML and rendered it within static site using Mkdoc (initially) and Mark Doc
+Redoc linting | I customised the Redoc linter and worked with DevOps to include the custom ruleset as part of the CICD pipeline
+IM | Instant messaging to chat to team members
+GitBash | For version control via Git
+Project management tools | For task management
+
+<!-- Redoc element with (local) link to your OpenAPI definition looks like so inside the body element:
+
+
+  <redoc spec-url="../swagger.yaml"></redoc>
+
+  Link to Redoc JavaScript on CDN for rendering standalone element:
+
+  <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+
+-->
+
+### API flat schema structure
+
+As this is a publically-available API, I will rather showcase an example of how I can assist the developers to improve the end-user experience by suggesting improvements to the service itself.
+
+
+<!-- openapi: 3.0.2
+info:
+  title:  Using oneOf to improve end-user experience
+  version: 0.1.0
+  description: >
+    DeFi Wallet transaction request as per V1 vs. proposal for V2 improvements.
+    <br>
+    The API specification can be constructed in such a way as to support end-users by constraining the data they can send. If an end-user is expected to send value A **or** value B and sending A&B will trigger an error, then it is best practice to control this with a `oneOf`. The `oneOf` directs the user as to which data they may send and constrains attempts to diverge from this.
+  contact:
+    name: Example API Services
+    url: "https://www.example.com/"
+    email: a@example.com
+
+servers:
+  - url: https://example.net
+    description: DEV API Server
+    variables:
+      basePath:
+        default: /qapi/v1
+
+security:
+  - ApiKeyAuth: []
+
+tags:
+
+  - name: DeFi Wallet current
+    description: The request made by the end-user attempts to support both legacy and current EVM transactions, but at the cost of end-user understanding, i.e., the schema structure does not allow the specification to control what is passed by the user.
+ proposed
+    description
+  - name: DeFi Wallet: The request made by end-user has been simplified to logically support legacy and current EVM transactions and `gas` now acts as an object to support that. BUT ALL existing connected wallets would be impacted (MMI/Wallet connect, DeFi wallet) causing a Class 2 break between V1 and V2. -->
+
+<!-- paths: -->
+
+<!-- ### Proposed /transaction endpoint:
+  post:
+    tags:
+      - DeFi Wallet proposed
+    summary: Create new transaction
+    description: >
+      Proposed alt structure for the endpoint that creates an outgoing DeFi Wallet transaction. Note, this touches on:
+        - supporting `gas` and `gasLimit` as per various chains requirements -- solution propsed supports end-user preventing them from making a call with both
+        - supporting legacy and EIP-1559 style transactions, by supporting end user in preventing them from making an invalid call
+        - removed `from`
+        <!-- - wip: does not touch the issue of chainID -- these external (Layer 1) wallets that we support are all for EVM networks as we don't support any other chains atm. On the back-end and Qredochain these wallets are generated as type Currency_ETH. This is used just for telling the qredochain and MPC's that it's an EVM based wallet, anything else we don't care as all the state is stored on the respective Layer 1 chain the user interacts with. Regarding the "chainID", in theory it is optional. If you don't specify it we get the chain ID based on the Wallet's type (which is ETH = chainID 1). If you don't specify a chainID, we assume that the transaction is done on Ethereum Mainnet. -->
+    parameters:
+      - required: true
+        schema:
+          title: signature
+          type: string
+        in: header
+        name: qredo-api-sig
+      - required: true
+        schema:
+          title: qredo-api-ts
+          type: string
+        in: header
+        name: qredo-api-ts
+      - required: true
+        schema:
+          title: api-key
+          type: string
+        in: header
+        name: qredo-api-key
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              from:
+                type: string
+                description: Wallet address funds originate from.
+                example: 0x84CE2138E54b1852689132FD73dDC4DExAmplE
+              to:
+                type: string
+                description: The recipient Wallet's address.
+                example: 0xac03bb73b6a9e108530aff4df5077c2ExAmplE
+              value:
+                type: string
+                description: The amount to transfer.
+                example: 100
+              price:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/gasPrice'
+                  - $ref: '#/components/schemas/EIP1559Structure'
+              gaslimit:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/gasLimit'
+                  - $ref: '#/components/schemas/gas'
+              data:
+                type: string
+                description: User-defined, optional field; included if the recipient is a smart contract.
+                example: ''
+              chainID:
+                type: string
+                description: Unique identifier for the L1 chain trascation will occur on, defaults to ETH mainnet, pass ID for alternative chains.
+                example: ''
+              note:
+                type: string
+                description: User-defined, optional field to include arbitary data.
+                example: Test Signing App test 34
+            required:
+              - from
+              - to
+              - value
+    responses:
+      '200':
+        description: Success - transaction request created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/txInfoResponse'
+
+<!-- All fields are strings because they are in the smallest denomination (wei) and if the value is big enough it could be problematic to serialise it in JSON. -->
+
+/transaction:
+  post:
+    tags:
+      - DeFi Wallet current
+    summary: Create new transaction
+    description: This endpoint creates an outgoing DeFi Wallet transaction.
+    parameters:
+      - required: true
+        schema:
+          title: signature
+          type: string
+        in: header
+        name: qredo-api-sig
+      - required: true
+        schema:
+          title: qredo-api-ts
+          type: string
+        in: header
+        name: qredo-api-ts
+      - required: true
+        schema:
+          title: api-key
+          type: string
+        in: header
+        name: qredo-api-key
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              from:
+                type: string
+                description: Wallet address funds originate from.
+                example: 0x84CE2138E54b1852689132FD73dDC4DExAmplE
+              to:
+                type: string
+                description: The receiver Wallet's address.
+                example: 0x94GE4738E54b2952689132FD73dDC4DExAmplE
+              value:
+                type: string
+                description: The amount to send.
+                example: 100
+              gas:
+                type: string
+                description: WARNING! unknown property.
+                example:
+              gasPrice:
+                type: string
+                description: Price user is willing to pay per unit, as per legacy EVM.
+                example: 21000
+              gasLimit:
+                type: string
+                description: The maximum units of gas units that can be consumed by the transaction.
+                example: 21000
+              maxFeePerGas:
+                type: string
+                description: As per EIP-1559; maximum amount of gas units the sender is willing to spend on the transaction (includes `maxFeePerGas` and `baseFeePerGas`).
+                example: ''
+              maxPriorityFeePerGas:
+                type: string
+                description: As per EIP-1559; the maximum amount of gas to be included as a tip to the validator.
+                example: ''
+              data:
+                type: string
+                description: User-defined, optional field to include arbitary data.
+                example: Testnet test 36521
+              chainID:
+                type: string
+                description: Unique identifier for the L1 chain trascation will occur on, defaults to ETH mainnet, pass ID for alternative chains.
+                example: 1
+              note:
+                type: string
+                description: User-defined, optional field to include arbitary data.
+                example: Test Signing App test 34
+            required:
+              - from
+              - to
+              - value
+    responses:
+      200:
+        description: Success - transaction request created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/txInfoResponse'
+
+components:
+
+  securitySchemes:
+      ApiKeyAuth:
+        description: API Key passed in header.
+        type: apiKey
+        in: header
+        name: qredo-api-key
+
+
+  schemas:
+
+      Error:
+        type: object
+        properties:
+          code:
+            type: string
+          msg:
+            type: string
+          detail:
+            type: object
+            properties:
+              reason:
+                type: string
+
+      gasLimit:
+        type: string
+        description: The maximum units of gas units that can be consumed by the transaction.
+        example: 21000
+
+      gas:
+        type: string
+        description: The maximum units of gas units that can be consumed by the transaction.
+        example: 21000
+
+      gasPrice:
+        type: string
+        description: Price user is willing to pay per unit, as per legacy EVM.
+        example: 100
+
+      EIP1559Structure:
+          type: object
+          properties:
+              maxFeePerGas:
+                type: string
+                description: The maximum amount of gas units the sender is willing to spend on the transaction (includes `maxPriorityFeePerGas` and `baseFeePerGas`). WIP description as per Ethereum docs BUT `baseFeePerGas` is not a propery of this tx, note could be this equates to `gas` as yet, unconfirmed.
+                example: 300
+              maxPriorityFeePerGas:
+                type: string
+                description: The maximum amount of gas to be included as a tip to the validator.
+                example: 10
+
+      txInfoResponse:
+        type: object
+        properties:
+          accountID:
+            type: string
+            description: Unique identifier of the Entity that holds the Wallet originating this transaction.
+            example: 5G7tj56Wv4bekm3VaQutHo1HJQvAwB9Gzu3WhB7K7rAD
+          chainID:
+            type: string
+            description: Unique identifier for the L1 chain trascation will occur on.
+            example: 1
+          createdBy:
+            type: string
+            description: Unique identifier for the user that initiated the transaction. request.
+            example: 5G7tj56Wv4bekm3VaQutHo1HJQvAwB9Gzu3WhB7K7rAD
+          data:
+            type: string
+            description: Hex-encoded transaction data.
+            example: ''
+          from:
+            type: string
+            description: Wallet address funds originate from.
+            example: 0x84CE2138E54b1852689132FD73dDC4D3973a44B8
+          gasLimit:
+            type: string
+            description: The maximum units of gas units that can be consumed by the transaction.
+            example: 2100
+          gasPrice:
+            type: string
+            description: Price user is willing to pay per unit, as per legacy EVM.
+            example: 2100
+          network:
+            type: string
+            description: wip -- this is not sent, what is it?
+            example: ''
+          nonce:
+            type: string
+            description: wip -- does it make sense to return a nonce for a transaction request that still needs to be approved?
+            example: 0x0
+          rawTX:
+            type: string
+            description: wip is this the signed transaction? Does it make sense to return this for a transaction request that is not yet approved?
+            example: 0xf88380018203339407a565b7ed7d7a678680a4c162885bedbb695fe080a44401a6e4000000000000000000000000000000000000000000000000000000000000001226a0223a7c9bcf5531c99be5ea7082183816eb20cfe0bbc322e97cc5c7f71ab8b20ea02aadee6b34b45bb15bc42d9c09de4a6754e7000908da72d48cc7704971491663
+          status:
+            type: string
+            description: wip is this an enum list?
+            example: ''
+          timestamps:
+            type: object
+            properties:
+              created:
+                type: integer
+                format: unix-timestamp
+              pending:
+                type: integer
+                format: unix-timestamp
+              authorized:
+                type: integer
+                format: unix-timestamp
+              approved:
+                type: integer
+                format: unix-timestamp
+              rejected:
+                type: integer
+                format: unix-timestamp
+              failed:
+                type: integer
+                format: unix-timestamp
+          to:
+            type: string
+            description: The receiver Wallet's address.
+            example: 0x94GE4738E54b2952689132FD73dDC4D3973a47J2
+          txHash:
+            type: string
+            description: Transaction hash from L1 chain. wip does it make sense to return this for a transaction request that is not yet approved?
+            example: ''
+          txID:
+            type: string
+            description: Transaction ID; as per `tx_id`.
+            example: 279MBUMtAX3lVxXDOgXzG9jNDDu
+          value:
+            type: string
+            example: 100
+            description: The amount to send.
+          events:
+            type: array
+            items:
+              $ref: '#/components/schemas/txStatusUpdate'
+
+      txStatusUpdate:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Transaction ID; as per `tx_id`.
+            example: 279MBUMtAX3lVxXDOgXzG9jNDDu
+          message:
+            type: string
+            description: Server message.
+            example: ''
+          status:
+            type: string
+            description: ''
+            example: ''
+            enum:
+              - created
+              - pending
+              - authorized
+              - approved
+              - rejected
+              - failed
+          timestamp:
+            type: integer
+            format: unix-timestamp
+            description: Timestamp of the status update.
+            example: ''
+
+
+ -->
