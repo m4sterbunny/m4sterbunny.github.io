@@ -1,4 +1,4 @@
-## Site:
+## Site
 
 https://m4sterbunny.github.io/build/#api-showcase
 
@@ -115,3 +115,31 @@ Thanks to the following people who have submitted major pull requests:
 - [@cvkef](https://github.com/cvkef)
 
 Also, thanks to [Sauce Labs](http://saucelabs.com) for sponsoring the development of the responsive styles.
+
+
+## SMTP2Go Deploy list
+
+API Definition
+
+File: openapi.yaml
+1. Transform API Definition into Website
+
+    Install dependencies at generator folder via npm install
+    Run at project root node ./generator/widdershins --user_templates ./generator/templates/openapi3 --search true --language_tabs 'ruby:Ruby' 'javascript:JavaScript' 'go:Go' 'python:Python' 'java:Java' 'csharp:C#' --expandBody true --summary openapi.yaml -o source/index.html.md.erb
+
+
+2. Deploy
+
+    Transform API definition
+    Build Slate
+    Commit changes
+    Merge changes into master
+    Push
+    Run deploy.sh
+    https://smtp2go.github.io/smtp2go.apidocs/
+
+
+## ToDo
+
+Setup [Vale for linting](https://passo.uno/posts/first-steps-with-the-vale-prose-linter/)
+
